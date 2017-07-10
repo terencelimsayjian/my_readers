@@ -2,4 +2,4 @@ deployment:
   prod:
     branch: master
     heroku:
-      appname: myreaders
+      appname: my-readers
