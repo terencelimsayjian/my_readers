@@ -1,5 +1,5 @@
 deployment:
-  prod:
+  staging:
     branch: master
     heroku:
-      appname: my-readers
+      appname: my-readers-staging
