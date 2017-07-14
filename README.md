@@ -1,27 +1,4 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# MYReaders
 
 ## Description
 
@@ -40,3 +17,17 @@ Local development branch naming:
 - `feature/<your-branch-name>` for substantial new feature or function
 - `enhance/<your-branch-name>` for minor feature or function enhancement
 - `bugfix/<your-branch-name>` for bug fixes
+
+## ERD
+
+https://www.lucidchart.com/invitations/accept/a36d5480-8344-4a62-9f18-08e41ea58442
+
+## KIV
+* Ruby version
+* System dependencies
+* Configuration
+* Database creation
+* Database initialization
+* How to run the test suite
+* Services (job queues, cache servers, search engines, etc.)
+* Deployment instructions
