@@ -31,6 +31,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do

@@ -25,5 +25,9 @@ module MyReaders
     config.generators.stylesheets = false
     config.generators.javascripts = false
     config.generators.helper = false
+
+    config.generators do |g|
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+    end
   end
 end

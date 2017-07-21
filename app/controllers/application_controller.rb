@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def authenticate_inviter!
     authenticate_admin!(:force => true)
   end
+
+  def authenticate_admin
+    redirect_to static_pages_index_path unless admin_signed_in?
+  end
 end
