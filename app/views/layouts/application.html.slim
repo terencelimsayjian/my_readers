@@ -8,11 +8,11 @@ html
     = csrf_meta_tags
 
     nav.navbar.navbar-default
-      div.container-fluid
-        div.navbar-header
-          a.navbar-brand href="#" Brand
+      .container-fluid
+        .navbar-header
+          a.navbar-brand href="#" MY Readers
 
-        div.collapse.navbar-collapse
+        .collapse.navbar-collapse
           ul.nav.navbar-nav
             li
               a href="#" Action
@@ -23,18 +23,21 @@ html
 
           ul.nav.navbar-nav.navbar-right
             li
-              a href="#" Action
+              a href=new_facilitator_session_url Facilitator Sign In
             li
-              a href="#" Action
+              a href=new_admin_session_url Admin Sign In
+
 
   body
-    div.container
-      p.notice
-        = notice
+    - if notice
+      .container
+        p.alert.alert-success
+          = notice
 
-    div.container
-      p.alert
-        = alert
+    - if alert
+      .container
+        p.alert.alert-danger
+          = alert
 
-    div.container
+    .container
       = yield
