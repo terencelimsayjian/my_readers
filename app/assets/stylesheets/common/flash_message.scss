@@ -1,0 +1,18 @@
+.flash-container {
+  color: white;
+  display: inline-block;
+  margin: 10px auto;
+
+  p {
+    padding: 5px;
+    margin: 0;
+  }
+}
+
+.flash-success {
+  background-color: green;
+}
+
+.flash-alert {
+  background-color: red;
+}

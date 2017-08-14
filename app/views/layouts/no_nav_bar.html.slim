@@ -8,15 +8,6 @@ html
     = csrf_meta_tags
 
   body class=css_class_for_controller_action(controller)
-    - if notice
-      .container
-        p.alert.alert-success
-          = notice
-
-    - if alert
-      .container
-        p.alert.alert-danger
-          = alert
 
     .body-container
       = yield

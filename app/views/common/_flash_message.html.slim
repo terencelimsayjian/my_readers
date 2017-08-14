@@ -1,9 +1,7 @@
 - if notice
-  .flash-message-container
-    p.alert.alert-success
-      = notice
+  .flash-container.flash-success
+    p = notice
 
 - if alert
-  .flash-message-container
-    p.alert.alert-danger
-      = alert
+  .flash-container.flash-alert
+    p = alert

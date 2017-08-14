@@ -19,15 +19,6 @@
     padding: 10px 10px;
   }
 
-  .form-submit-button {
-    background-color: $darker-blue;
-    border: none;
-    color: white;
-    font-weight: bold;
-    padding: 6px 10px;
-    font-size: 0.9em;
-  }
-
   .form-group {
     margin: 10px auto 0 auto;
 
@@ -46,6 +37,15 @@
       padding-left: 0.4rem;
     }
 
+  }
+
+  .form-submit-button {
+    background-color: $darker-blue;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 6px 10px;
+    font-size: 0.9em;
   }
 
 

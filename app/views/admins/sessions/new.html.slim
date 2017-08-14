@@ -4,6 +4,8 @@
 .form-container
   h3 MYReaders Login
 
+  = render 'common/flash_message'
+
   .div
   = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
     div.form-group
