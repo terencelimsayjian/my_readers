@@ -1,14 +1,42 @@
+@import "colors";
+
 .navbar {
-  .navbar-brand {
-    font-size: 1.5em;
+  background-color: $darker-blue;
+  width: 100%;
+  color: white;
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    margin: auto 0.75rem;
   }
 
   .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-  }
 
-  .nav li {
-    font-size: 1.25em;
+    .navbar-brand {
+      display: inline-block;
+
+      a {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+
+    .nav {
+      display: inline-block;
+      padding: 0;
+
+      li {
+        display: inline-block;
+      }
+    }
+
+    .navbar-right {
+      float: right;
+    }
+
   }
 }

@@ -1,18 +1,18 @@
 .my-readers-logo
   = image_tag("my-readers-logo.png")
 
-.container.form-container
+.form-container
   h3 MYReaders Login
 
-  .container
+  .div
   = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
     div.form-group
       = f.label 'Username'
-      = f.text_field :username, autofocus: true, required: true, class: "form-control"
+      = f.text_field :username, autofocus: true, required: true, class: "form-text-input"
 
     div.form-group
       = f.label 'Password'
-      = f.text_field :password, autocomplete: 'off', class: "form-control", type: "password"
+      = f.text_field :password, autocomplete: 'off', type: "password", class: "form-text-input"
 
     - if devise_mapping.rememberable?
       div.form-group
@@ -20,4 +20,4 @@
         = f.label :remember_me, class: "form-check-label"
 
     div.form-group
-      = f.submit 'Log in', class: "my-button"
+      = f.submit 'Log in', class: "form-submit-button"
