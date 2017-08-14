@@ -1,19 +1,23 @@
-h2 Log in
+.my-readers-logo
+  = image_tag("my-readers-logo.png")
 
-.container-fluid
-= form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-  div.field
-    = f.label 'Username'
-    = f.text_field :username, autofocus: true, required: true
+.container.form-container
+  h3 MYReaders Login
 
-  div.field
-    = f.label 'Password'
-    = f.text_field :password, autocomplete: 'off'
+  .container
+  = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+    div.form-group
+      = f.label 'Username'
+      = f.text_field :username, autofocus: true, required: true, class: "form-control"
 
-  - if devise_mapping.rememberable?
-    div.field
-      = f.check_box :remember_me
-      = f.label :remember_me
+    div.form-group
+      = f.label 'Password'
+      = f.text_field :password, autocomplete: 'off', class: "form-control", type: "password"
 
-  div.actions
-  = f.submit 'Log in'
+    - if devise_mapping.rememberable?
+      div.form-group
+        = f.check_box :remember_me, class: "form-check-input"
+        = f.label :remember_me, class: "form-check-label"
+
+    div.form-group
+      = f.submit 'Log in', class: "my-button"

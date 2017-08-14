@@ -1,0 +1,28 @@
+@import "colors";
+
+.admins_sessions.new {
+  background-color: $blue;
+
+  .my-readers-logo {
+    width: 20%;
+    margin: 20px auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .form-container {
+    background-color: white;
+    width: 480px;
+  }
+
+  .my-button {
+    background-color: $darker-blue;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+
+}

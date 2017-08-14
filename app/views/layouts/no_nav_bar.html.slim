@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title MY Readers
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag "application", 'data-turbolinks-track' => 'reload'
+    = csrf_meta_tags
+
+  body class=css_class_for_controller_action(controller)
+    - if notice
+      .container
+        p.alert.alert-success
+          = notice
+
+    - if alert
+      .container
+        p.alert.alert-danger
+          = alert
+
+    .container
+      = yield
