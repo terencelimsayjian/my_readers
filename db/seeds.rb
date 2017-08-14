@@ -1,5 +1,6 @@
 Admin.create(username:"admin", password:"test123")
 
+
 Facilitator.create(email:"facilitator1@email.com", password:"test123")
 Facilitator.create(email:"facilitator2@email.com", password:"test123")
 Facilitator.create(email:"facilitator3@email.com", password:"test123")

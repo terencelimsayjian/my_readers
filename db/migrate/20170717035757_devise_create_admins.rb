@@ -12,6 +12,9 @@ class DeviseCreateAdmins < ActiveRecord::Migration[5.1]
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
+      ## Rememberable
+      t.datetime :remember_created_at
+
       t.timestamps null: false
     end
   end

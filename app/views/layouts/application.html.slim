@@ -4,30 +4,25 @@ html
     title MY Readers
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     = stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => 'reload'
-    /= stylesheet_link_tag    "#{params[:controller]}/#{params[:controller]}"
     = javascript_include_tag "application", 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
 
     nav.navbar.navbar-default
-      .container-fluid
+      .nav-container
         .navbar-header
-          a.navbar-brand href="#" MY Readers
+          a.navbar-brand href="#" Admin Dashboard
 
-        .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a href="#" Action
-            li
-              a href="#" Action
-            li
-              a href="#" Action
+        ul.nav.navbar-nav
+          li = link_to("Facilitators", root_url)
+          li = link_to("Projects", root_url)
+          li = link_to("Data", root_url)
 
-          ul.nav.navbar-nav.navbar-right
-            li
-              a href=new_facilitator_session_url Facilitator Sign In
-            li
-              a href=new_admin_session_url Admin Sign In
-
+        ul.nav.navbar-nav.navbar-right
+          li = link_to("Facilitator Sign In", new_facilitator_session_url)
+          - if admin_signed_in?
+            li = link_to('Admin Sign Out', destroy_admin_session_path, method: :delete)
+          - else
+            li = link_to('Admin Sign In', new_admin_session_path)
 
   body class=css_class_for_controller_action(controller)
     - if notice
