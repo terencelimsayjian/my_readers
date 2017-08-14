@@ -4,6 +4,6 @@ class Facilitators::InvitationsController < Devise::InvitationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:full_name, :school, :district, :state, :phone_number])
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :full_name, :school, :district, :state, :phone_number])
   end
 end
