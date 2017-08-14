@@ -12,41 +12,4 @@
     }
   }
 
-  .form-container {
-    background-color: white;
-    width: 480px;
-    margin: 0 auto;
-    padding: 10px 10px;
-  }
-
-  .form-group {
-    margin: 10px auto 0 auto;
-
-    .form-text-input {
-      display: block;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      font-size: 1em;
-      margin-top: 5px;
-      border: 1px solid rgba(0,0,0,.15);
-      border-radius: .25rem;
-    }
-
-    .form-check-label {
-      padding-left: 0.4rem;
-    }
-
-  }
-
-  .form-submit-button {
-    background-color: $darker-blue;
-    border: none;
-    color: white;
-    font-weight: bold;
-    padding: 6px 10px;
-    font-size: 0.9em;
-  }
-
-
 }
