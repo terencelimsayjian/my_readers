@@ -1,4 +1,4 @@
-Admin.create(username:"admin", password:"test123")
+Admin.create(username:"admin", password:"test1234")
 
 
 Facilitator.create(email:"facilitator1@email.com", password:"test1234", full_name:"Terence Lim Say Jian", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"019-1234123")
