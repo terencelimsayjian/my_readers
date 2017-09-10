@@ -1,0 +1,35 @@
+.table-container {
+  margin-top: 10px;
+
+  ul {
+    width: 100%;
+
+    li {
+      display: inline-block;
+      width: 14%;
+      p {
+        margin: 5px auto;
+      }
+    }
+  }
+
+  .header-row, .table-row {
+    padding: 5px 5px 5px 10px;
+    margin: 0 auto;
+  }
+
+  .header-row {
+    background-color: $darker-blue;
+
+    .header-column {
+      p {
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+
+  .table-row:nth-child(2n+1) {
+    background-color: $light-grey;
+  }
+}

@@ -42,16 +42,18 @@ h6 {
   font-size: 12px;
 }
 
-p, label {
+p, label, a {
   font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
 }
 
-.link-btn {
-  background-color: $darker-blue;
-  border: none;
-  color: white;
-  font-weight: bold;
-  padding: 6px 10px;
-  font-size: 0.9em;
-  text-decoration: none;
-}
+//.header-container {
+//  display: flex;
+//  align-items: center;
+//
+//  h3 {
+//  }
+//
+//  a {
+//  }
+//}

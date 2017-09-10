@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   def authenticate_admin
     redirect_to static_pages_index_path unless admin_signed_in?
   end
+
+  def after_sign_in_path_for(resource)
+    if resource.class == Admin
+      facilitators_path
+    end
+  end
 end

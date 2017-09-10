@@ -1,11 +1,38 @@
-h3 Facilitators
+.header-container
+  .container
+    h3 Facilitators
+    = link_to "Invite New Facilitator", new_facilitator_invitation_url, class: "link-btn"
 
-= link_to "Invite New Facilitator", new_facilitator_invitation_url, class: "link-btn"
+.table-container
+  ul.header-row
+    li.header-column
+      p Full Name
+    li.header-column
+      p Email
+    li.header-column
+      p School
+    li.header-column
+      p District
+    li.header-column
+      p State
+    li.header-column
+      p Phone Number
+    li.header-column
+      p Add Project
 
-.container
   - @facilitators.each do |facilitator|
-    ul
+    ul.table-row
+      li
+        p = facilitator.full_name
       li
         p = facilitator.email
+      li
+        p = facilitator.school
+      li
+        p = facilitator.district
+      li
+        p = facilitator.state
+      li
+        p = facilitator.phone_number
       li
         a href=root_url Add Project
