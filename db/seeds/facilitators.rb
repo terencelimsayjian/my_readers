@@ -1,45 +1,45 @@
-Facilitator.create(
+Facilitator.find_or_create_by(
   email: 'facilitator1@email.com',
-  password: 'test1234',
   full_name: 'Terence Lim Say Jian',
-  school: 'SK Kampung Tunku',
+  school: 'SK Puay Chai',
   district: 'Petaling Jaya',
   state: 'Kuala Lumpur',
   phone_number: '0191234123'
-)
-Facilitator.create(
+) { |facilitator| facilitator.password = 'test1234' }
+
+Facilitator.find_or_create_by(
   email: 'facilitator2@email.com',
-  password: 'test1234',
   full_name: 'Rachel Lim Sze Ying',
-  school: 'SK Kampung Tunku',
+  school: 'SK St. Andrews',
   district: 'Petaling Jaya',
   state: 'Kuala Lumpur',
   phone_number: '0191234123'
-)
-Facilitator.create(
+) { |facilitator| facilitator.password = 'test1234' }
+
+Facilitator.find_or_create_by(
   email: 'facilitator3@email.com',
-  password: 'test1234',
   full_name: 'Daniel Goh Keng Yu',
   school: 'SK Kampung Tunku',
   district: 'Petaling Jaya',
   state: 'Kuala Lumpur',
   phone_number: '0191234123'
-)
-Facilitator.create(
+) { |facilitator| facilitator.password = 'test1234' }
+
+Facilitator.find_or_create_by(
   email: 'facilitator4@email.com',
-  password: 'test1234',
   full_name: 'Charis Ding',
-  school: 'SK Kampung Tunku',
+  school: 'SK Taman Mydin',
   district: 'Petaling Jaya',
   state: 'Kuala Lumpur',
   phone_number: '0191234123'
-)
-Facilitator.create(
+) { |facilitator| facilitator.password = 'test1234' }
+
+Facilitator.find_or_create_by(
   email: 'facilitator5@email.com',
-  password: 'test1234',
-  full_name: 'Nurul Fatimah hahaha',
-  school: 'SK Kampung Tunku',
+  full_name: 'Nurul Fatimah',
+  school: 'SK Taman Megah',
   district: 'Petaling Jaya',
   state: 'Kuala Lumpur',
   phone_number: '0191234123'
-)
+) { |facilitator| facilitator.password = 'test1234' }
+
