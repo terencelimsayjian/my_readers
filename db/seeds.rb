@@ -1,8 +1,12 @@
-Admin.create(username:"admin", password:"test1234")
+seed_files = %w[admins facilitators]
 
+seed_files.each do |seed|
+  seed_path = Rails.root.join('db', 'seeds', "#{seed}.rb")
 
-Facilitator.create(email:"facilitator1@email.com", password:"test1234", full_name:"Terence Lim Say Jian", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"0191234123")
-Facilitator.create(email:"facilitator2@email.com", password:"test1234", full_name:"Rachel Lim Sze Ying", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"0191234123")
-Facilitator.create(email:"facilitator3@email.com", password:"test1234", full_name:"Daniel Goh Keng Yu", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"0191234123")
-Facilitator.create(email:"facilitator4@email.com", password:"test1234", full_name:"Charis Goh Goh Myreaders", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"0191234123")
-Facilitator.create(email:"facilitator5@email.com", password:"test1234", full_name:"Nurul Fatimah hahaha", school:"SK Kampung Tunku", district:"Petaling Jaya", state:"Kuala Lumpur", phone_number:"0191234123")
+  if File.file?(seed_path)
+    puts "Seeding #{seed.humanize} ..."
+    require seed_path
+  end
+end
+
+puts 'Done!'
