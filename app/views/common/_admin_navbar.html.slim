@@ -9,7 +9,11 @@ header.nav.navbar
       li = link_to("Data", root_url)
 
     ul.nav.navbar-right
-      li = link_to("Facilitator Sign In", new_facilitator_session_url)
+      - if facilitator_signed_in?
+        li = link_to('Facilitator Sign Out', destroy_facilitator_session_path, method: :delete)
+      - else
+        li = link_to('Facilitator Sign In', new_facilitator_session_path)
+
       - if admin_signed_in?
         li = link_to('Admin Sign Out', destroy_admin_session_path, method: :delete)
       - else

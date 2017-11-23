@@ -1,4 +1,6 @@
 class Facilitators::SessionsController < Devise::SessionsController
+  layout 'no_nav_bar'
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

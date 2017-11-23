@@ -1,0 +1,15 @@
+@import "colors";
+
+.facilitators_sessions.new {
+  background-color: $blue;
+
+  .my-readers-logo {
+    width: 20%;
+    margin: 20px auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+}
