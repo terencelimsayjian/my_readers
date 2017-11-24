@@ -28,7 +28,7 @@ gem 'devise_invitable', '~> 1.7.0'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.5'
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'factory_girl_rails'
   gem 'faker'
