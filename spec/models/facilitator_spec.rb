@@ -10,7 +10,7 @@ RSpec.describe Facilitator, type: :model do
           full_name: "Sample Facilitator",
           school: "SMK school",
           district: "Petaling Jaya",
-          state: "Selangor",
+          state: 14,
           phone_number: "019-1234123"
       )
     }

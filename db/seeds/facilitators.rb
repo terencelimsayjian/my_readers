@@ -3,7 +3,7 @@ Facilitator.find_or_create_by(
   full_name: 'Terence Lim Say Jian',
   school: 'SK Puay Chai',
   district: 'Petaling Jaya',
-  state: 'Kuala Lumpur',
+  state: 1,
   phone_number: '0191234123'
 ) { |facilitator| facilitator.password = 'test1234' }
 
@@ -12,7 +12,7 @@ Facilitator.find_or_create_by(
   full_name: 'Rachel Lim Sze Ying',
   school: 'SK St. Andrews',
   district: 'Petaling Jaya',
-  state: 'Kuala Lumpur',
+  state: 1,
   phone_number: '0191234123'
 ) { |facilitator| facilitator.password = 'test1234' }
 
@@ -21,7 +21,7 @@ Facilitator.find_or_create_by(
   full_name: 'Daniel Goh Keng Yu',
   school: 'SK Kampung Tunku',
   district: 'Petaling Jaya',
-  state: 'Kuala Lumpur',
+  state: 1,
   phone_number: '0191234123'
 ) { |facilitator| facilitator.password = 'test1234' }
 
@@ -30,7 +30,7 @@ Facilitator.find_or_create_by(
   full_name: 'Charis Ding',
   school: 'SK Taman Mydin',
   district: 'Petaling Jaya',
-  state: 'Kuala Lumpur',
+  state: 1,
   phone_number: '0191234123'
 ) { |facilitator| facilitator.password = 'test1234' }
 
@@ -39,7 +39,7 @@ Facilitator.find_or_create_by(
   full_name: 'Nurul Fatimah',
   school: 'SK Taman Megah',
   district: 'Petaling Jaya',
-  state: 'Kuala Lumpur',
+  state: 1,
   phone_number: '0191234123'
 ) { |facilitator| facilitator.password = 'test1234' }
 

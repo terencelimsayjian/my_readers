@@ -8,7 +8,7 @@ class DeviseCreateFacilitators < ActiveRecord::Migration[5.1]
       t.string :full_name, null: false
       t.string :school, null: false
       t.string :district, null: false
-      t.string :state, null: false
+      t.integer :state, null: false
       t.string :phone_number, null: false
 
       ## Recoverable

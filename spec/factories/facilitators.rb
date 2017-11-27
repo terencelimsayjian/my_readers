@@ -5,7 +5,7 @@ FactoryGirl.define do
     full_name 'John Doe'
     school 'SMK Merbok'
     district 'Merbok'
-    state 'Kedah'
+    state 1
     phone_number '0193131379'
 
     # reset_password_token 'somestring'

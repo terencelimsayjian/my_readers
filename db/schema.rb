@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170721072235) do
     t.string "full_name", null: false
     t.string "school", null: false
     t.string "district", null: false
-    t.string "state", null: false
+    t.integer "state", null: false
     t.string "phone_number", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
