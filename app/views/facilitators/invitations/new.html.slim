@@ -2,7 +2,8 @@
   h3 Invite Facilitator to Platform
 
   = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
-    = devise_error_messages!
+    = render 'common/devise_message'
+
     div.form-group
       = f.label :email
       = f.text_field :email, type: "email", class: "form-input", required: true

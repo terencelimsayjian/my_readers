@@ -2,17 +2,18 @@
   h3 = t('devise.invitations.edit.header')
 
   = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f|
-    = devise_error_messages!
+    = render 'common/devise_message'
+
     = f.hidden_field :invitation_token
 
     div.form-group
       - if f.object.class.require_password_on_accepting
         = f.label :password
-        = f.password_field :password, class: "form-input"
+        = f.password_field :password, class: "form-input", required: true, minlength: 8, maxLength: 24
 
     div.form-group
       = f.label :password_confirmation
-      = f.password_field :password_confirmation, class: "form-input"
+      = f.password_field :password_confirmation, class: "form-input", required: true, minlength: 8, maxLength: 24
 
     div.form-group
       = f.submit "Set my password", class: "form-submit-button"

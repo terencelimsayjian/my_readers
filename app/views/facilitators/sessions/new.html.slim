@@ -9,7 +9,7 @@
     = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
         div.form-group
             = f.label :email
-            = f.text_field :email, type: "email", class: "form-input", autofocus: true, required: true
+            = f.text_field :email, type: "text", class: "form-input", autofocus: true, required: true
 
         div.form-group
             = f.label 'Password'
