@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
   get 'static_pages/index'
+  get 'static_pages/facilitator_home'
 
   get '/facilitators' => 'facilitators#index'
 

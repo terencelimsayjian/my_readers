@@ -1,0 +1,6 @@
+h1 Facilitator home
+
+- if facilitator_signed_in?
+  li = link_to('Facilitator Sign Out', destroy_facilitator_session_path, method: :delete)
+- else
+  li = link_to('Facilitator Sign In', new_facilitator_session_path)
