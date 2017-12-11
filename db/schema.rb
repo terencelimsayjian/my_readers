@@ -59,8 +59,10 @@ ActiveRecord::Schema.define(version: 20170721072235) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
     t.bigint "facilitator_id"
+    t.string "name", null: false
+    t.date "estimated_start_date", null: false
+    t.date "estimated_end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["facilitator_id"], name: "index_projects_on_facilitator_id"
