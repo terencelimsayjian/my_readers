@@ -8,12 +8,11 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
 
   root 'static_pages#index'
+
   get 'static_pages/index'
   get 'static_pages/facilitator_home'
 
-  get '/facilitators' => 'facilitators#index'
-
-  resources :facilitators, only: [:show] do
-    resources :projects, only: [:new, :create], controller: 'projects'
+  resources :facilitators, only: [:show, :index] do
+    resources :projects, only: [:new, :create]
   end
 end
