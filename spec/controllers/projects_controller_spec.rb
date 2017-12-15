@@ -25,11 +25,33 @@ RSpec.describe ProjectsController, type: :controller do
         get :new, params: { facilitator_id: facilitator.id }
         expect(response).to render_template(:new)
       end
+    end
+  end
 
-      # expect(assigns(:facilitators).count).to eq(3)
+  describe "#create" do
+    let!(:facilitator) { create(:facilitator) }
+    let!(:admin) { create(:admin) }
+
+    before { sign_in admin }
+
+    context 'when project creation succeeds' do
+      it 'should redirect to facilitators#index' do
+        post :create, params: {
+          facilitator_id: facilitator.id,
+          project: attributes_for(:project)
+        }
+        expect(response).to redirect_to(facilitators_path)
+      end
     end
 
-
-
+    context 'when project creation fails' do
+      it 'should render projects#new' do
+        post :create, params: {
+          facilitator_id: facilitator.id,
+          project: attributes_for(:project, :invalid)
+        }
+        expect(response).to render_template(:new)
+      end
+    end
   end
 end

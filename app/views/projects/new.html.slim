@@ -1,1 +1,19 @@
-h1 Ola
+.form-container
+  = form_for @project, url: facilitator_projects_path(@project.facilitator) do |f|
+
+    .adjacent-form-group-container
+      h3 Create a new Project
+      = f.submit 'Submit', class: 'link-btn'
+
+    .form-group
+      = f.label 'Project Name'
+      = f.text_field :name, class: 'form-input'
+
+    .form-group
+      = f.label 'Estimated Start Date'
+      = f.date_field :estimated_start_date, class: 'form-input'
+
+    .form-group
+      = f.label 'Estimated End Date'
+      = f.date_field :estimated_end_date, class: 'form-input'
+
