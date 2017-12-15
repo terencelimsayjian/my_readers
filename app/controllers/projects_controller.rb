@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   before_action :authenticate_admin
   before_action :prepare_facilitator, only: [:new, :create]
 
@@ -26,4 +27,5 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :estimated_start_date, :estimated_end_date)
   end
+
 end

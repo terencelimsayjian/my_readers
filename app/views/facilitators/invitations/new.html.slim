@@ -6,28 +6,28 @@
 
     div.form-group
       = f.label :email
-      = f.text_field :email, type: "email", class: "form-input", required: true
+      = f.text_field :email, type: 'email', class: 'form-input', required: true
 
     div.form-group
       = f.label :full_name
-      = f.text_field :full_name, class: "form-input", required: true
+      = f.text_field :full_name, class: 'form-input', required: true
 
     div.form-group
       = f.label :school
-      = f.text_field :school, class: "form-input", required: true
+      = f.text_field :school, class: 'form-input', required: true
 
     div.form-group
       = f.label :district
-      = f.text_field :district, class: "form-input", required: true
+      = f.text_field :district, class: 'form-input', required: true
 
     div.adjacent-form-group-container
       div.form-group.left-form-group
         = f.label :state
-        = f.select :state, options_for_select(Facilitator.states.keys.map {|k| [k.humanize.capitalize, k]}), {}, { class: "form-input", required: true }
+        = f.select :state, options_for_select(Facilitator.states.keys.map {|k| [k.humanize.capitalize, k]}), {}, { class: 'form-input', required: true }
 
       div.form-group.right-form-group
         = f.label :phone_number
-        = f.text_field :phone_number, type: "number", class: "form-input", required: true
+        = f.text_field :phone_number, type: 'number', class: 'form-input', required: true
 
     div.form-group
-      = f.submit t("devise.invitations.new.submit_button"), class: "form-submit-button"
+      = f.submit t('devise.invitations.new.submit_button'), class: 'form-submit-button'

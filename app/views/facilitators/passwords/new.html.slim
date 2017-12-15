@@ -6,10 +6,10 @@
 
     div.form-group
       = f.label :email
-      = f.email_field :email, autofocus: true, class: "form-input"
+      = f.email_field :email, autofocus: true, class: 'form-input'
 
     div.form-group
-      = f.submit "Send me reset password instructions", class: "form-submit-button"
+      = f.submit 'Send me reset password instructions', class: 'form-submit-button'
 
   - if controller_name != 'sessions'
-    = link_to "Log in", new_session_path(resource_name), class: "form-link"
+    = link_to 'Log in', new_session_path(resource_name), class: 'form-link'

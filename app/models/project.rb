@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+
   belongs_to :facilitator
 
   validates :name, presence: true
@@ -13,4 +14,5 @@ class Project < ApplicationRecord
   def dates_are_present?
     estimated_start_date.present? && estimated_end_date.present?
   end
+
 end

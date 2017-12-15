@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery with: :exception
 
   protected
 
   def authenticate_inviter!
-    authenticate_admin!(:force => true)
+    authenticate_admin!(force: true)
   end
 
   def authenticate_admin
@@ -18,4 +19,5 @@ class ApplicationController < ActionController::Base
       static_pages_facilitator_home_path
     end
   end
+
 end
