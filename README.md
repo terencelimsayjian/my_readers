@@ -36,6 +36,12 @@ Local development branch naming:
 - `enhance/<your-branch-name>` for minor feature or function enhancement
 - `bugfix/<your-branch-name>` for bug fixes
 
+### Style policy
+
+Rubocop is used to enforce a consistent code style across the codebase. The rules can be found in `.rubocop.yml`.
+
+If you are contributing to the codebase, please ensure you run `$ rubocop` from your terminal to run the code analyser on your code before pushing.
+
 ## ERD
 
 https://www.lucidchart.com/invitations/accept/a36d5480-8344-4a62-9f18-08e41ea58442

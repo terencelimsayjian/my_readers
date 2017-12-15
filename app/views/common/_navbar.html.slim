@@ -1,10 +1,10 @@
 header.nav.navbar
   .nav-container
     .navbar-brand
-        a href="#" Admin Dashboard
+        a href='#' Admin Dashboard
 
     ul.nav
-      li = link_to("Facilitators", facilitators_url)
+      li = link_to('Facilitators', facilitators_url)
 
     ul.nav.navbar-right
       - if admin_signed_in?
