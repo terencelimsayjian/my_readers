@@ -1,5 +1,5 @@
 .form-container
-  = form_for @project, url: facilitator_projects_path(@project.facilitator) do |f|
+  = form_for @project, url: admin_facilitator_projects_path(@project.facilitator) do |f|
 
     .adjacent-form-group-container
       h3 Create a new Project
