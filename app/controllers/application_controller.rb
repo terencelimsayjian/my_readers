@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.class == Admin
-      facilitators_path
+      admin_facilitators_path
     elsif resource.class == Facilitator
       static_pages_facilitator_home_path
     end

@@ -1,4 +1,4 @@
-class FacilitatorsController < ApplicationController
+class Admin::FacilitatorsController < ApplicationController
 
   before_action :authenticate_admin
 

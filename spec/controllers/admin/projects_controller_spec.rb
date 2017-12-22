@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProjectsController, type: :controller do
+RSpec.describe Admin::ProjectsController, type: :controller do
   describe "#new" do
     describe '#facilitators' do
       context 'facilitator tries viewing admin dashboard' do
@@ -40,7 +40,7 @@ RSpec.describe ProjectsController, type: :controller do
           facilitator_id: facilitator.id,
           project: attributes_for(:project)
         }
-        expect(response).to redirect_to(facilitators_path)
+        expect(response).to redirect_to(admin_facilitators_path)
       end
     end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FacilitatorsController, type: :controller do
+RSpec.describe Admin::FacilitatorsController, type: :controller do
   describe '#facilitators' do
     context 'facilitator tries viewing admin dashboard' do
       let!(:facilitator) { create(:facilitator) }
