@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Project, type: :model do
   let(:subject) { create(:project) }
 
+  it { expect(subject).to belong_to(:facilitator) }
   it { expect(subject).to validate_presence_of(:name) }
 
   describe 'custom validations' do
