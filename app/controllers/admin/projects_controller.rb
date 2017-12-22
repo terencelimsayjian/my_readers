@@ -25,7 +25,7 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :estimated_start_date, :estimated_end_date)
+    params.require(:project).permit(:name, :estimated_start_date, :estimated_end_date, students_attributes: [:id, :name, :class_name, :phone_number, :_destroy])
   end
 
 end

@@ -53,5 +53,57 @@ RSpec.describe Admin::ProjectsController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
+
+    context 'when project creation with 2 students succeeds' do
+      let(:students_attributes) do
+        {
+          students_attributes: {
+            '0': attributes_for(:student),
+            '1': attributes_for(:student)
+          }
+        }
+      end
+      let(:params) do
+        {
+          facilitator_id: facilitator.id,
+          project: attributes_for(:project).merge(students_attributes)
+        }
+      end
+
+      it 'should redirect to facilitators#index' do
+        post :create, params: params
+        expect(response).to redirect_to(admin_facilitators_path)
+      end
+      it 'should create 2 students' do
+        post :create, params: params
+        expect(Student.count).to eq(2)
+      end
+    end
+
+    context 'when project creation with students fails' do
+      let(:students_attributes) do
+        {
+          students_attributes: {
+            '0': attributes_for(:student, :invalid),
+            '1': attributes_for(:student)
+          }
+        }
+      end
+      let(:params) do
+        {
+          facilitator_id: facilitator.id,
+          project: attributes_for(:project).merge(students_attributes)
+        }
+      end
+
+      it 'should render projects#new' do
+        post :create, params: params
+        expect(response).to render_template(:new)
+      end
+      it 'should not create any students' do
+        post :create, params: params
+        expect(Student.count).to eq(0)
+      end
+    end
   end
 end
