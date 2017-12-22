@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
 
   belongs_to :facilitator
+  has_many :students, dependent: :destroy
 
   validates :name, presence: true
   validate :estimated_dates_are_valid?
