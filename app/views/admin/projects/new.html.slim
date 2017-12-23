@@ -17,3 +17,7 @@
       = f.label 'Estimated End Date'
       = f.date_field :estimated_end_date, class: 'form-input'
 
+    = f.fields_for :students do |student|
+      = render 'student_fields', f: student
+    .links
+      = link_to_add_association 'Add a student', f, :students, class: 'link-btn'

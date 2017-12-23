@@ -1,6 +1,9 @@
 class Project < ApplicationRecord
 
   belongs_to :facilitator
+  has_many :students, dependent: :destroy
+
+  accepts_nested_attributes_for :students, allow_destroy: true
 
   validates :name, presence: true
   validate :estimated_dates_are_valid?

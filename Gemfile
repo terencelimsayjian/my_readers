@@ -25,6 +25,8 @@ gem 'slim-rails'
 gem 'devise',           '~> 4.2'
 gem 'devise_invitable', '~> 1.7.0'
 
+gem 'cocoon'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_girl_rails'
