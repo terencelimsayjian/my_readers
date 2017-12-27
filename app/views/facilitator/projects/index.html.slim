@@ -1,8 +1,12 @@
-h3 Ongoing Projects
+.header-container
+  h3 Ongoing Projects
 
-- @projects.each do |project|
-  h4 = project.name
-  p = "Start Date: #{project.estimated_start_date}"
-  p = "End Date: #{project.estimated_start_date}"
-  p = "Number of students enrolled: #{project.students.count}"
-  = link_to 'View', '#', class: 'link-btn'
+.card-container
+  - @projects.each do |project|
+    .card
+      h4 = project.name
+      p = "Start Date: #{project.estimated_start_date}"
+      p = "End Date: #{project.estimated_start_date}"
+      p = "Number of students enrolled: #{project.students.count}"
+      .bottom-container
+        = link_to 'View', '#', class: 'link-btn'
