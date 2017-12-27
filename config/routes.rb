@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'static_pages/facilitator_home'
 
   namespace :admin do
-    resources :projects, only: [:index]
+    resources :projects, only: [:index, :show]
 
     resources :facilitators, only: [:show, :index] do
       resources :projects, only: [:new, :create]

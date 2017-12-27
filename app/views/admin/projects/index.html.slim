@@ -14,7 +14,7 @@
     li.header-column.large
       p # Students
     li.header-column.large
-      p Edit
+      p View
 
   - @projects.each do |project|
     ul.table-row
@@ -27,4 +27,4 @@
       li.large
         p = project.students.count
       li.large
-        = link_to 'Edit', '#', class: 'clickable-link'
+        = link_to 'View', admin_project_path(project.id), class: 'clickable-link'

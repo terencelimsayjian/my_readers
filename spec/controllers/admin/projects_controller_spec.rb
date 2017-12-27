@@ -31,6 +31,35 @@ RSpec.describe Admin::ProjectsController, type: :controller do
     end
   end
 
+  describe '#show' do
+    context '#facilitators' do
+      context 'facilitator tries viewing admin dashboard' do
+        let!(:facilitator) { create(:facilitator) }
+        let!(:project) { create(:project) }
+
+        before { sign_in facilitator }
+
+        it 'redirects to unauthorised page' do
+          get :show, params: { id: project.id }
+          expect(response).to redirect_to(static_pages_index_path)
+        end
+      end
+    end
+
+    context 'admin views project' do
+      let!(:admin) { create(:admin) }
+      let!(:project) { create(:project) }
+
+      before { sign_in admin }
+
+      it 'should render project' do
+        get :show, params: { id: project.id }
+        expect(response).to render_template(:show)
+        expect(assigns(:project)).to eq(project)
+      end
+    end
+  end
+
   describe '#new' do
     describe '#facilitators' do
       context 'facilitator tries viewing admin dashboard' do
