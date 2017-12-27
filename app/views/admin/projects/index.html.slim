@@ -1,11 +1,7 @@
 .header-container
   h3 Projects
 
-div.label-container
-  div.label-legend
-    p Total Projects
-  div.label-content
-    p = @projects.count
+= render partial: 'common/summary_label', locals: { legend: 'Total Projects', content: @projects.count }
 
 .table-container
   ul.header-row
