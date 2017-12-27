@@ -1,12 +1,13 @@
 .nested-fields
   .adjacent-form-group-container
-    .form-group
-      = f.label :name
+    .form-group.left-form-group
+      /= f.label :name
       = f.text_field :name, class: 'form-input'
-    .form-group
-      = f.label :class_name
+    .form-group.center-form-group
+      /= f.label :class_name
       = f.text_field :class_name, class: 'form-input'
-    .form-group
-      = f.label :phone_number
+    .form-group.center-form-group
+      /= f.label :phone_number
       = f.text_field :phone_number, class: 'form-input'
-    = link_to_remove_association 'Remove', f, class: 'link-btn'
+    .form-group.right-form-group.bottom-align-form-group
+      = link_to_remove_association 'x Remove this student', f, class: 'clickable-link form-clickable-link˚'

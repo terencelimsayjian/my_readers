@@ -5,6 +5,17 @@
   padding: 10px;
   border: 1px solid rgba(0,0,0,.15);
 
+  .inner-form {
+    width: 100%;
+    margin: 30px 10px auto 10px;
+  }
+
+  .inline-header-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .adjacent-form-group-container {
     display: flex;
     flex-direction: row;
@@ -21,6 +32,11 @@
 
     .right-form-group {
       padding-left: 8px;
+    }
+
+    .center-form-group {
+      padding-left: 8px;
+      padding-right: 8px;
     }
   }
 
@@ -60,5 +76,24 @@
     display: block;
     padding-top: 5px;
   }
+
+  .form-clickable-link {
+    font-size: 0.9em;
+  }
+
+  .bottom-align-form-group {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .form-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
+.large-form-container {
+  width: 900px;
+}

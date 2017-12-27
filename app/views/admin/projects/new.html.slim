@@ -1,8 +1,8 @@
-.form-container
+.form-container.large-form-container
   = form_for @project, url: admin_facilitator_projects_path(@project.facilitator) do |f|
 
-    .adjacent-form-group-container
-      h3 Create a new Project
+    .inline-header-button-container
+      h3 Create New Project
       = f.submit 'Submit', class: 'link-btn'
 
     .form-group
@@ -17,7 +17,18 @@
       = f.label 'Estimated End Date'
       = f.date_field :estimated_end_date, class: 'form-input'
 
-    = f.fields_for :students do |student|
-      = render 'student_fields', f: student
-    .links
-      = link_to_add_association 'Add a student', f, :students, class: 'link-btn'
+    .inner-form
+      h4 Students
+      .adjacent-form-group-container
+        .form-group.left-form-group
+          = f.label :name
+        .form-group.center-form-group
+          = f.label :class_name
+        .form-group
+          = f.label :phone_number
+        .form-group
+
+      = f.fields_for :students do |student|
+        = render 'student_fields', f: student
+      .links
+        = link_to_add_association '+ Add a student', f, :students, class: 'clickable-link form-clickable-link'
