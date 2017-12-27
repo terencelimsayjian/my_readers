@@ -1,5 +1,9 @@
 class Facilitator::ProjectsController < ApplicationController
 
-  def index; end
+  before_action :authenticate_facilitator
+
+  def index
+    @projects = current_facilitator.projects.all
+  end
 
 end

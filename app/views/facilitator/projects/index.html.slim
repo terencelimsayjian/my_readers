@@ -1,1 +1,8 @@
-h1 HO HO HA HA
+h3 Ongoing Projects
+
+- @projects.each do |project|
+  h4 = project.name
+  p = "Start Date: #{project.estimated_start_date}"
+  p = "End Date: #{project.estimated_start_date}"
+  p = "Number of students enrolled: #{project.students.count}"
+  = link_to 'View', '#', class: 'link-btn'
