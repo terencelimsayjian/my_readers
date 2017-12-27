@@ -47,6 +47,14 @@ p, label, a {
   font-size: 12px;
 }
 
+span.bold {
+  font-weight: bold;
+}
+
+p.small-spacing {
+  line-height: 0.5em;
+}
+
 //.header-container {
 //  display: flex;
 //  align-items: center;

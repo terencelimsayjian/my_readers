@@ -1,4 +1,13 @@
 .form-container.large-form-container
+  h4 Facilitator Details
+  p.small-spacing = "Name: #{@facilitator.full_name}"
+  p.small-spacing = "School: #{@facilitator.school}"
+  p.small-spacing = "District: #{@facilitator.district}"
+  p.small-spacing = "State: #{@facilitator.state.capitalize}"
+  p.small-spacing = "Email: #{@facilitator.email}"
+  p.small-spacing = "Phone Number: #{@facilitator.phone_number}"
+
+.form-container.large-form-container
   = form_for @project, url: admin_facilitator_projects_path(@project.facilitator) do |f|
 
     .inline-header-button-container

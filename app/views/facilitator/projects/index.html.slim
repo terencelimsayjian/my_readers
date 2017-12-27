@@ -1,0 +1,12 @@
+.header-container
+  h3 Ongoing Projects
+
+.card-container
+  - @projects.each do |project|
+    .card
+      h4 = project.name
+      p = "Start Date: #{prettify_date(project.estimated_start_date)}"
+      p = "End Date: #{prettify_date(project.estimated_end_date)}"
+      p = "Number of students enrolled: #{project.students.count}"
+      .bottom-container
+        = link_to 'View', '#', class: 'link-btn'
