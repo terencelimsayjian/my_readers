@@ -1,28 +1,4 @@
-h3 Admin view
-
 .header-container
-  h3 = @project.name
+  h3 = project.name
 
-= render partial: 'common/summary_label', locals: { legend: 'Total Students', content: @project.students.count }
-
-= render partial: 'common/summary_label', locals: { legend: 'Start Date', content: prettify_date(@project.estimated_start_date) }
-
-= render partial: 'common/summary_label', locals: { legend: 'End Date', content: prettify_date(@project.estimated_end_date) }
-
-.table-container
-  ul.header-row
-    li.header-column.large
-      p Name
-    li.header-column.large
-      p Class
-    li.header-column.large
-      p Contact
-
-  - @project.students.each do |student|
-    ul.table-row
-      li.large
-        p = student.name
-      li.large
-        p = student.class_name
-      li.large
-        p = student.phone_number
+= render partial: 'common/project', locals: { project: @project }
