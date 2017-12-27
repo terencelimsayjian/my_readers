@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :facilitators, only: [:show, :index] do
       resources :projects, only: [:new, :create]
     end
+    end
+
+  namespace :facilitator do
+    resources :projects, only: [:index]
   end
 
   devise_for :facilitators, controllers: {
