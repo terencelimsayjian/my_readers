@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if resource.class == Admin
       admin_facilitators_path
     elsif resource.class == Facilitator
-      static_pages_facilitator_home_path
+      facilitator_projects_path
     end
   end
 
