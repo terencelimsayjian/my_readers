@@ -3,6 +3,10 @@ class Admin::ProjectsController < ApplicationController
   before_action :authenticate_admin
   before_action :prepare_facilitator, only: [:new, :create]
 
+  def index
+    @projects = Project.all
+  end
+
   def new
     @project = @facilitator.projects.build
     @facilitator
