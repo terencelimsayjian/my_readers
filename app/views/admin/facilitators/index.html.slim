@@ -2,6 +2,12 @@
   h3 Facilitators
   = link_to 'Invite New Facilitator', new_facilitator_invitation_url, class: 'link-btn'
 
+div.label-container
+  div.label-legend
+    p Total Facilitators
+  div.label-content
+    p = @facilitators.count
+
 .table-container
   ul.header-row
     li.header-column

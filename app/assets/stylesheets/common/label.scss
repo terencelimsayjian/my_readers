@@ -1,6 +1,6 @@
 .label-container {
   border: 1px solid black;
-  //border-radius: 5px;
+  border-radius: 2px;
   display: inline-block;
 
   p {
@@ -12,13 +12,13 @@
   .label-legend {
     background-color: $grey;
     color: white;
-    padding: 5px 12px;
+    padding: 0 10px;
     display: inline-block;
   }
 
   .label-content {
     font-weight: bold;
-    padding: 5px 12px;
+    padding: 0 10px;
     display: inline-block;
   }
 
