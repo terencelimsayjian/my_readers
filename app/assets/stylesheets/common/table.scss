@@ -19,6 +19,19 @@
         margin: 5px auto;
       }
     }
+
+    li.small {
+      width: 10%;
+    }
+
+    li.medium {
+      width: 14%
+    }
+
+    li.large {
+      width: 20%;
+    }
+
   }
 
   .header-row, .table-row {
@@ -35,6 +48,7 @@
         color: white;
       }
     }
+
   }
 
   .table-row:nth-child(2n+1) {

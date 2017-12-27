@@ -1,1 +1,28 @@
-h1 HOHO HAHA
+.header-container
+  h1 Projects
+
+.table-container
+  ul.header-row
+    li.header-column.large
+      p Name
+    li.header-column.large
+      p Start Date
+    li.header-column.large
+      p End Date
+    li.header-column.large
+      p # Students
+    li.header-column.large
+      p Edit
+
+  - @projects.each do |project|
+    ul.table-row
+      li.large
+        p = project.name
+      li.large
+        p = prettify_date(project.estimated_start_date)
+      li.large
+        p = prettify_date(project.estimated_end_date)
+      li.large
+        p = project.students.count
+      li.large
+        = link_to 'Edit', '#', class: 'clickable-link'
