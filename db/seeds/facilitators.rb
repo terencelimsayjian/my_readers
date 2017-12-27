@@ -1,5 +1,5 @@
 Facilitator.find_or_create_by(
-  email: 'facilitator1@email.com',
+  email: 'a@b.com',
   full_name: 'Terence Lim Say Jian',
   school: 'SK Puay Chai',
   district: 'Petaling Jaya',
