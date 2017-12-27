@@ -9,7 +9,6 @@ class Admin::ProjectsController < ApplicationController
 
   def new
     @project = @facilitator.projects.build
-    @facilitator
   end
 
   def create
