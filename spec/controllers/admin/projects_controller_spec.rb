@@ -24,8 +24,10 @@ RSpec.describe Admin::ProjectsController, type: :controller do
       it 'should render facilitators template' do
         get :new, params: { facilitator_id: facilitator.id }
         expect(response).to render_template(:new)
+        expect(assigns(:facilitator)).to eq(facilitator)
       end
     end
+
   end
 
   describe "#create" do
