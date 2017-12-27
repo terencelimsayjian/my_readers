@@ -1,11 +1,7 @@
 .header-container
   h3 Projects
 
-div.label-container
-  div.label-legend
-    p Total Projects
-  div.label-content
-    p = @projects.count
+= render partial: 'common/summary_label', locals: { legend: 'Total Projects', content: @projects.count }
 
 .table-container
   ul.header-row
@@ -18,7 +14,7 @@ div.label-container
     li.header-column.large
       p # Students
     li.header-column.large
-      p Edit
+      p View
 
   - @projects.each do |project|
     ul.table-row
@@ -31,4 +27,4 @@ div.label-container
       li.large
         p = project.students.count
       li.large
-        = link_to 'Edit', '#', class: 'clickable-link'
+        = link_to 'View', admin_project_path(project.id), class: 'clickable-link'
