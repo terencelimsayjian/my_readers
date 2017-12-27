@@ -6,4 +6,8 @@ class Facilitator::ProjectsController < ApplicationController
     @projects = current_facilitator.projects.all
   end
 
+  def show
+    @project = Project.find(params[:id])
+  end
+
 end

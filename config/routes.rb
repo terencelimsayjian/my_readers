@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :facilitator do
-    resources :projects, only: [:index]
+    resources :projects, only: [:index, :show]
   end
 
   devise_for :facilitators, controllers: {
