@@ -14,9 +14,9 @@ RSpec.describe Admin::FacilitatorsController, type: :controller do
     end
 
     context 'admin views admin dashboard' do
-      let!(:facilitator_1) { create(:facilitator) }
-      let!(:facilitator_2) { create(:facilitator) }
-      let!(:facilitator_3) { create(:facilitator) }
+      let!(:facilitator_1) { create(:facilitator, state: 1, full_name: 'Charlie') }
+      let!(:facilitator_2) { create(:facilitator, state: 1, full_name: 'Beatrice') }
+      let!(:facilitator_3) { create(:facilitator, state: 0, full_name: 'Aaron') }
       let!(:admin) { create(:admin) }
 
       before { sign_in admin }
@@ -26,6 +26,15 @@ RSpec.describe Admin::FacilitatorsController, type: :controller do
         expect(response).to render_template(:index)
         expect(assigns(:facilitators).count).to eq(3)
       end
+
+      it 'should return facilitators that are sorted by state, then by name' do
+        get :index
+        expect(assigns(:facilitators).count).to eq(3)
+        expect(assigns(:facilitators)[0]).to eq(facilitator_3)
+        expect(assigns(:facilitators)[1]).to eq(facilitator_2)
+        expect(assigns(:facilitators)[2]).to eq(facilitator_1)
+      end
     end
+
   end
 end
