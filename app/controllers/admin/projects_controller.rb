@@ -15,6 +15,11 @@ class Admin::ProjectsController < ApplicationController
     @project = @facilitator.projects.build
   end
 
+  def edit
+    @project = Project.find(params[:id])
+    @facilitator = Facilitator.find(@project.facilitator_id)
+  end
+
   def create
     @project = @facilitator.projects.build(project_params)
     if @project.save
