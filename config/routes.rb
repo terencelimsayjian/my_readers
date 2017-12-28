@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#index'
 
-  get 'static_pages/index'
   get 'static_pages/facilitator_home'
+  get 'static_pages/index'
 
   namespace :admin do
     resources :projects, only: [:index, :show, :edit, :update]
