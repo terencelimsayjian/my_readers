@@ -1,3 +1,35 @@
 .header-container
-  h3 Add New Diagnostic for Student Name (Class Name)
+  h3 = "Add New Diagnostic for #{@student.name} (#{@student.class_name})"
 
+.diagnostic-form-container
+  .row-container
+    .diagnostic-form-group
+      h5 Level
+    .diagnostic-form-group
+      h5 # of words
+    .diagnostic-form-group
+      h5 Word Recognition
+    .diagnostic-form-group
+      h5 % Words Recognised
+    .diagnostic-form-group
+      h5 Fluency
+    .diagnostic-form-group
+      h5 Comprehension
+
+  = form_for @diagnostic, url: student_diagnostic_path do |diagnostic_f|
+    = diagnostic_f.fields_for :levels do |f|
+      .row-container
+        .diagnostic-form-group
+          = f.text_field :reading_level, class: 'diagnostic-form-input'
+        .diagnostic-form-group
+          = f.text_field :number_of_tested_words, class: 'diagnostic-form-input'
+        .diagnostic-form-group
+          = f.text_field :phonics_score, class: 'diagnostic-form-input'
+        .diagnostic-form-group
+          p 90%
+        .diagnostic-form-group
+          = f.text_field :fluency_score, class: 'diagnostic-form-input'
+        .diagnostic-form-group
+          = f.text_field :comprehension_score, class: 'diagnostic-form-input'
+
+    = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard'

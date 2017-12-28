@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   get 'student/:id/diagnostics/new', to: 'diagnostics#new', as: :new_student_diagnostic
-  # post 'student/:id/diagnostics', to: 'diagnostics#create'
+  post 'student/:id/diagnostics', to: 'diagnostics#create', as: :student_diagnostic
 
   devise_for :facilitators, controllers: {
     sessions: 'facilitators/sessions',
