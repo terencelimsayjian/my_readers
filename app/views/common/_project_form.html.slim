@@ -1,0 +1,31 @@
+.inline-header-button-container
+  h3 Create New Project
+  = f.submit 'Submit', class: 'link-btn'
+
+.form-group
+  = f.label 'Project Name'
+  = f.text_field :name, class: 'form-input'
+
+.form-group
+  = f.label 'Estimated Start Date'
+  = f.date_field :estimated_start_date, class: 'form-input'
+
+.form-group
+  = f.label 'Estimated End Date'
+  = f.date_field :estimated_end_date, class: 'form-input'
+
+.inner-form
+  h4 Students
+  .adjacent-form-group-container
+    .form-group.left-form-group
+      = f.label :name
+    .form-group.center-form-group
+      = f.label :class_name
+    .form-group
+      = f.label :phone_number
+    .form-group
+
+  = f.fields_for :students do |student|
+    = render 'student_fields', f: student
+  .links
+      = link_to_add_association '+ Add a student', f, :students, class: 'clickable-link form-clickable-link'
