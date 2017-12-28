@@ -8,6 +8,6 @@
   p.small-spacing = "Phone Number: #{@facilitator.phone_number}"
 
 .form-container.large-form-container
-  = form_for @project, url: edit_admin_project_path(@project.id) do |f|
+  = form_for @project, url: admin_project_path(@project.id) do |f|
 
     = render partial: 'common/project_form', locals: { f: f }

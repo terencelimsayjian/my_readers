@@ -31,6 +31,19 @@ class Admin::ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find(params[:id])
+    @facilitator = Facilitator.find(@project.facilitator_id)
+
+    if @project.update(project_params)
+      flash[:notice] = 'Project successfully updated'
+      redirect_to admin_project_path(@project.id)
+    else
+      flash[:alert] = @project.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   private
 
   def prepare_facilitator
