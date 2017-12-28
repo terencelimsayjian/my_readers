@@ -15,6 +15,11 @@ class Admin::ProjectsController < ApplicationController
     @project = @facilitator.projects.build
   end
 
+  def edit
+    @project = Project.find(params[:id])
+    @facilitator = Facilitator.find(@project.facilitator_id)
+  end
+
   def create
     @project = @facilitator.projects.build(project_params)
     if @project.save
@@ -23,6 +28,19 @@ class Admin::ProjectsController < ApplicationController
     else
       flash[:alert] = @project.errors.full_messages.to_sentence
       render :new
+    end
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    @facilitator = Facilitator.find(@project.facilitator_id)
+
+    if @project.update(project_params)
+      flash[:notice] = 'Project successfully updated'
+      redirect_to admin_project_path(@project.id)
+    else
+      flash[:alert] = @project.errors.full_messages.to_sentence
+      render :edit
     end
   end
 

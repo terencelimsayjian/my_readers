@@ -89,6 +89,36 @@ RSpec.describe Admin::ProjectsController, type: :controller do
 
   end
 
+  describe '#edit' do
+    describe '#facilitators' do
+      context 'facilitator tries viewing admin dashboard' do
+        let!(:facilitator) { create(:facilitator) }
+        let!(:project) { create(:project) }
+
+        before { sign_in facilitator }
+
+        it 'redirects to unauthorised page' do
+          get :edit, params: { id: project.id }
+          expect(response).to redirect_to(static_pages_index_path)
+        end
+      end
+    end
+
+    context 'admin views edit project page' do
+      let!(:admin) { create(:admin) }
+      let!(:project) { create(:project) }
+
+      before { sign_in admin }
+
+      it 'should render project' do
+        get :edit, params: { id: project.id }
+        expect(response).to render_template(:edit)
+        expect(assigns(:project)).to eq(project)
+      end
+    end
+
+  end
+
   describe '#create' do
     let!(:facilitator) { create(:facilitator) }
     let!(:admin) { create(:admin) }
@@ -164,6 +194,61 @@ RSpec.describe Admin::ProjectsController, type: :controller do
       it 'should not create any students' do
         post :create, params: params
         expect(Student.count).to eq(0)
+      end
+    end
+  end
+
+  describe '#update' do
+    let!(:facilitator) { create(:facilitator) }
+    let!(:admin) { create(:admin) }
+    let!(:project) { create(:project) }
+
+    before { sign_in admin }
+
+    context 'when project update succeeds' do
+      it 'should redirect to admin_project#show' do
+        patch :update, params: {
+            id: project.id,
+            project: attributes_for(:project)
+        }
+        expect(response).to redirect_to(admin_project_path(project.id))
+      end
+    end
+
+    context 'when project update fails' do
+      it 'should render projects#new' do
+        patch :update, params: {
+            id: project.id,
+            project: attributes_for(:project, :invalid)
+        }
+        expect(response).to render_template(:edit)
+      end
+    end
+
+    context 'when project update with 2 students succeeds' do
+      let(:students_attributes) do
+        {
+            students_attributes: {
+                '0': attributes_for(:student),
+                '1': attributes_for(:student)
+            }
+        }
+      end
+      let(:params) do
+        {
+            id: project.id,
+            project: attributes_for(:project).merge(students_attributes)
+        }
+      end
+
+      it 'should redirect to facilitators#index' do
+        patch :update, params: params
+        expect(response).to redirect_to(admin_project_path(project.id))
+      end
+
+      it 'should create 2 students' do
+        patch :update, params:params
+        expect(Student.count).to eq(2)
       end
     end
   end

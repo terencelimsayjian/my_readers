@@ -1,4 +1,4 @@
 .header-container
-  h3 = project.name
+  h3 = @project.name
 
-= render partial: 'common/project', locals: { project: @project }
+= render partial: 'common/project_show', locals: { project: @project }
