@@ -86,11 +86,11 @@ RSpec.describe DiagnosticLevelValidator do
     end
 
     context '#phonics_score_validations' do
-      it 'should be invalid if an earlier level has below 99.00% words recognised' do
+      it 'should be invalid if an earlier level has below 99% words recognised' do
         levels_attributes = {
             levels_attributes: {
-                '0': attributes_for(:level, total_number_of_words: 100, phonics_score:98, reading_level: 1),
-                '1': attributes_for(:level, total_number_of_words: 100, phonics_score:99, reading_level: 2),
+                '0': attributes_for(:level, number_of_tested_words: 100, phonics_score:98, reading_level: 1),
+                '1': attributes_for(:level, number_of_tested_words: 100, phonics_score:99, reading_level: 2),
             }
         }
 
@@ -100,11 +100,11 @@ RSpec.describe DiagnosticLevelValidator do
         expect(validation_info[:message]).to eq ('Earlier levels must exceed 99% words recognised.')
         end
 
-      it 'should be valid if all but the last level has above 99.00% words recognised' do
+      it 'should be valid if all but the last level has above 99% words recognised' do
         levels_attributes = {
             levels_attributes: {
-                '0': attributes_for(:level, total_number_of_words: 100, phonics_score:99, reading_level: 1),
-                '1': attributes_for(:level, total_number_of_words: 100, phonics_score:80, reading_level: 2),
+                '0': attributes_for(:level, number_of_tested_words: 100, phonics_score:99, reading_level: 1),
+                '1': attributes_for(:level, number_of_tested_words: 100, phonics_score:80, reading_level: 2),
             }
         }
 
@@ -112,7 +112,36 @@ RSpec.describe DiagnosticLevelValidator do
         validation_info = diagnostic_level_validator.get_validation_info(get_params(levels_attributes))
         expect(validation_info[:is_valid]).to be (true)
         expect(validation_info[:message]).to eq ('')
+        end
+
+      it 'should round up 98.5% and above to meet the threshold' do
+        levels_attributes = {
+            levels_attributes: {
+                '0': attributes_for(:level, number_of_tested_words: 1000, phonics_score:985, reading_level: 1),
+                '1': attributes_for(:level, number_of_tested_words: 100, phonics_score:30, reading_level: 2),
+            }
+        }
+
+        diagnostic_level_validator = DiagnosticLevelValidator.new
+        validation_info = diagnostic_level_validator.get_validation_info(get_params(levels_attributes))
+        expect(validation_info[:is_valid]).to be (true)
+        expect(validation_info[:message]).to eq ('')
+        end
+
+      it 'should round up 98.49% and below to fail the threshold' do
+        levels_attributes = {
+            levels_attributes: {
+                '0': attributes_for(:level, number_of_tested_words: 1000, phonics_score:984, reading_level: 1),
+                '1': attributes_for(:level, number_of_tested_words: 100, phonics_score:30, reading_level: 2),
+            }
+        }
+
+        diagnostic_level_validator = DiagnosticLevelValidator.new
+        validation_info = diagnostic_level_validator.get_validation_info(get_params(levels_attributes))
+        expect(validation_info[:is_valid]).to be (false)
+        expect(validation_info[:message]).to eq ('Earlier levels must exceed 99% words recognised.')
       end
+
     end
 
   end
