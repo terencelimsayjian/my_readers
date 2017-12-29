@@ -6,5 +6,9 @@ FactoryGirl.define do
     fluency_score 1
     comprehension_score 1
     diagnostic nil
+
+    trait :invalid do
+      reading_level nil
+    end
   end
 end
