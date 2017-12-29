@@ -17,7 +17,7 @@ RSpec.describe DiagnosticLevelValidator do
       expect(validation_info[:message]).to eq ('')
     end
 
-    context 'reading_level' do
+    context 'reading_level_validations' do
       it 'should be invalid if the reading_level of the single level is not 1' do
         levels_attributes = {
             levels_attributes: {
@@ -85,6 +85,35 @@ RSpec.describe DiagnosticLevelValidator do
       end
     end
 
+    context '#phonics_score_validations' do
+      it 'should be invalid if an earlier level has below 99.00% words recognised' do
+        levels_attributes = {
+            levels_attributes: {
+                '0': attributes_for(:level, total_number_of_words: 100, phonics_score:98, reading_level: 1),
+                '1': attributes_for(:level, total_number_of_words: 100, phonics_score:99, reading_level: 2),
+            }
+        }
+
+        diagnostic_level_validator = DiagnosticLevelValidator.new
+        validation_info = diagnostic_level_validator.get_validation_info(get_params(levels_attributes))
+        expect(validation_info[:is_valid]).to be (false)
+        expect(validation_info[:message]).to eq ('Earlier levels must exceed 99% words recognised.')
+        end
+
+      it 'should be valid if all but the last level has above 99.00% words recognised' do
+        levels_attributes = {
+            levels_attributes: {
+                '0': attributes_for(:level, total_number_of_words: 100, phonics_score:99, reading_level: 1),
+                '1': attributes_for(:level, total_number_of_words: 100, phonics_score:80, reading_level: 2),
+            }
+        }
+
+        diagnostic_level_validator = DiagnosticLevelValidator.new
+        validation_info = diagnostic_level_validator.get_validation_info(get_params(levels_attributes))
+        expect(validation_info[:is_valid]).to be (true)
+        expect(validation_info[:message]).to eq ('')
+      end
+    end
 
   end
 end
@@ -97,7 +126,9 @@ def get_params(levels_attributes)
 end
 
 # custom validations
-  # check if any before the last one is below 99%
-  # check if except the last one is below 99%
-  # check if there is more than 1 and no more than 11
-  # check if there is one of each level going up
+  # phonics_validations
+    # check if any before the last one is below 99%
+    # check if except the last one is below 99%
+  # reading_level_validations
+    # check if there is more than 1 and no more than 11
+    # check if there is one of each level going up
