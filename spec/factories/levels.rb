@@ -10,5 +10,6 @@ FactoryGirl.define do
     trait :invalid do
       reading_level nil
     end
+
   end
 end

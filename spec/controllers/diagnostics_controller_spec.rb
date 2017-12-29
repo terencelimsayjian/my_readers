@@ -34,6 +34,67 @@ RSpec.describe DiagnosticsController, type: :controller do
     end
   end
 
+  describe '#create' do
+    let!(:facilitator) { create(:facilitator) }
+    let!(:admin) { create(:admin) }
+    let!(:project) { create(:project) }
+    let!(:student) { create(:student, project: project) }
+
+    describe '#admin' do
+      before { sign_in admin }
+
+      context 'when diagnostic creation succeeds' do
+        it 'should redirect to admin_project#show' do
+          post :create, params: {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic)
+          }
+          expect(response).to redirect_to(admin_project_path(project.id))
+        end
+      end
+
+      context 'when diagnostic creation fails' do
+        let(:levels_attributes) do
+          {
+              levels_attributes: {
+                  '0': attributes_for(:level),
+                  '1': attributes_for(:level, :invalid)
+              }
+          }
+        end
+
+        let(:invalid_params) do
+          {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
+          }
+        end
+
+        it 'should render diagnostics#new' do
+          post :create, params: invalid_params
+          expect(response).to render_template(:new)
+        end
+      end
+    end
+
+    describe '#facilitator' do
+      before { sign_in facilitator }
+
+      context 'when diagnostic creation succeeds' do
+        it 'should redirect to facilitator_project#show' do
+          post :create, params: {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic)
+          }
+          expect(response).to redirect_to(facilitator_project_path(project.id))
+        end
+      end
+    end
+
+  end
+
+
+
   # describe '#index' do
   #
   #   context 'admin views projects' do

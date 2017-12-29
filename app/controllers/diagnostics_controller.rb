@@ -1,3 +1,5 @@
+require Rails.root.to_s + '/app/utils/diagnostic_level_validator_util.rb'
+
 class DiagnosticsController < ApplicationController
 
   before_action :authenticate_user
@@ -9,15 +11,9 @@ class DiagnosticsController < ApplicationController
   end
 
   def create
-    # back end validations
-    # custom validations
-    # check if any before the last one is below 99%
-    # check if except the last one is below 99%
-    # check if there is more than 1 and no more than 11
-    # check if there is one of each level going up
 
     # all the other validations can leave to active Record
-
+    new_validator = DiagnosticLevelValidator.new
 
     @diagnostic = @student.diagnostics.build(diagnostic_params)
 
