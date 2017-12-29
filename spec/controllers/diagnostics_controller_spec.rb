@@ -44,11 +44,24 @@ RSpec.describe DiagnosticsController, type: :controller do
       before { sign_in admin }
 
       context 'when diagnostic creation succeeds' do
-        it 'should redirect to admin_project#show' do
-          post :create, params: {
-              id: student.id,
-              diagnostic: attributes_for(:diagnostic)
+        let(:levels_attributes) do
+          {
+              levels_attributes: {
+                  '0': attributes_for(:level),
+              }
           }
+        end
+
+        let(:params) do
+          {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
+          }
+        end
+
+        it 'should redirect to admin_project#show' do
+
+          post :create, params: params
           expect(response).to redirect_to(admin_project_path(project.id))
         end
       end
@@ -81,11 +94,23 @@ RSpec.describe DiagnosticsController, type: :controller do
       before { sign_in facilitator }
 
       context 'when diagnostic creation succeeds' do
-        it 'should redirect to facilitator_project#show' do
-          post :create, params: {
-              id: student.id,
-              diagnostic: attributes_for(:diagnostic)
+        let(:levels_attributes) do
+          {
+              levels_attributes: {
+                  '0': attributes_for(:level),
+              }
           }
+        end
+
+        let(:params) do
+          {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
+          }
+        end
+
+        it 'should redirect to facilitator_project#show' do
+          post :create, params: params
           expect(response).to redirect_to(facilitator_project_path(project.id))
         end
       end

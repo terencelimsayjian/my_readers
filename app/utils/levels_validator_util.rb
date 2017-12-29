@@ -1,11 +1,9 @@
-class DiagnosticLevelValidator
+class LevelsValidator
 
-  def get_validation_info(diagnostic_params)
-    levels = diagnostic_params[:diagnostic][:levels_attributes].values
+  def get_validation_info(levels)
+    sorted_levels = levels.sort_by {|level| level[:reading_level].to_i }
 
-    sorted_levels = levels.sort_by {|level| level[:reading_level] }
-
-    reading_levels = sorted_levels.map { |level| level[:reading_level] }
+    reading_levels = sorted_levels.map { |level| level[:reading_level].to_i }
 
     if reading_levels.first != 1
       return validation_object(false, 'Invalid starting level.')
@@ -35,7 +33,7 @@ class DiagnosticLevelValidator
   protected
 
   def calculate_percentage_correct(level, precision)
-    (level[:phonics_score].to_f/level[:number_of_tested_words]).round(precision)
+    ((level[:phonics_score].to_f)/(level[:number_of_tested_words].to_f)).round(precision)
   end
 
   def validation_object(validity, message)

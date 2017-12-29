@@ -1,4 +1,4 @@
-require Rails.root.to_s + '/app/utils/diagnostic_level_validator_util.rb'
+require Rails.root.to_s + '/app/utils/levels_validator_util.rb'
 
 class DiagnosticsController < ApplicationController
 
@@ -7,17 +7,18 @@ class DiagnosticsController < ApplicationController
 
   def new
     @diagnostic = @student.diagnostics.build
-    3.times {@diagnostic.levels.build} # To get the first row
+    2.times {@diagnostic.levels.build}
   end
 
   def create
-
-    # all the other validations can leave to active Record
-    new_validator = DiagnosticLevelValidator.new
+    diagnostic_level_validation_info = LevelsValidator.new.get_validation_info(params[:diagnostic][:levels_attributes].values)
 
     @diagnostic = @student.diagnostics.build(diagnostic_params)
 
-    puts(diagnostic_params)
+    unless diagnostic_level_validation_info[:is_valid]
+      flash[:alert] = diagnostic_level_validation_info[:message]
+      render :new and return
+    end
 
     if @diagnostic.save
       flash[:notice] = 'Diagnostic successfully created'
