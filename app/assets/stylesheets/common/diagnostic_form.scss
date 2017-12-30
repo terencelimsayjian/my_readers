@@ -9,7 +9,6 @@
     display: flex;
 
     .diagnostic-form-group {
-      //margin: ;
       padding-left: 5px;
       padding-right: 5px;
       box-sizing: border-box;
@@ -26,6 +25,23 @@
         border: 1px solid rgba(0, 0, 0, .15);
         border-radius: .25rem;
         height: 36px;
+      }
+    }
+
+  }
+
+  .link-container {
+    display: flex;
+    justify-content: center;
+
+    .clickable-link-container {
+      margin: 0 5px;
+      width: 17%;
+      display: flex;
+      justify-content: center;
+
+      a {
+        font-size: 0.8em;
       }
     }
   }

@@ -17,19 +17,29 @@
       h5 Comprehension
 
   = form_for @diagnostic, url: student_diagnostic_path do |diagnostic_f|
-    = diagnostic_f.fields_for :levels do |f|
-      .row-container
-        .diagnostic-form-group
-          = f.text_field :reading_level, class: 'diagnostic-form-input'
-        .diagnostic-form-group
-          = f.text_field :number_of_tested_words, class: 'diagnostic-form-input'
-        .diagnostic-form-group
-          = f.text_field :phonics_score, class: 'diagnostic-form-input'
-        .diagnostic-form-group
-          p 90%
-        .diagnostic-form-group
-          = f.text_field :fluency_score, class: 'diagnostic-form-input'
-        .diagnostic-form-group
-          = f.text_field :comprehension_score, class: 'diagnostic-form-input'
+    .input-row-container
+      = diagnostic_f.fields_for :levels do |f|
+        .row-container.input-row
+            .diagnostic-form-group
+              /= f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
+              /p = 1
+              = f.text_field :reading_level, type: 'number', class: 'diagnostic-form-input'
+              /<input id="prodId" name="prodId" type="hidden" value="xm234jq">
+            .diagnostic-form-group
+              = f.text_field :number_of_tested_words, type: 'number', class: 'diagnostic-form-input'
+            .diagnostic-form-group
+              = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score'
+            .diagnostic-form-group
+              p.percentage-words-recognised
+            .diagnostic-form-group
+              = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input'
+            .diagnostic-form-group
+              = f.text_field :comprehension_score, type: 'number', class: 'diagnostic-form-input'
 
     = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard'
+
+  .link-container
+    .clickable-link-container
+      a.clickable-link.add-next-level + Add Next Level
+    .clickable-link-container
+      a.clickable-link.remove-latest-level x Remove Latest Level

@@ -7,7 +7,7 @@ class DiagnosticsController < ApplicationController
 
   def new
     @diagnostic = @student.diagnostics.build
-    2.times {@diagnostic.levels.build}
+    @diagnostic.levels.build
   end
 
   def create
