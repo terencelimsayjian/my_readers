@@ -5,6 +5,14 @@ $(document).ready(function () {
         assignScoreCalculationListener(indexOfNextInputRow);
     });
 
+    $("a.remove-latest-level").click(function () {
+        var numberOfInputRows = $("div.input-row").length;
+
+        if (numberOfInputRows > 1) {
+            $("div.input-row").last().remove();
+        }
+    });
+
     var startingNumberOfRows = $("div.input-row").length;
     for (var i = 0; i < startingNumberOfRows; i++) {
         assignScoreCalculationListener(i);
