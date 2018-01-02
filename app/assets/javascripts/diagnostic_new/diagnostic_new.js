@@ -1,44 +1,57 @@
 $(document).on('turbolinks:load', function () {
     $(".clickable-link-container > a.add-next-level").click(function () {
+        var levelsData = $("#levels_information").data().levelsInformation;
         var indexOfNextInputRow = $("div.input-row").length;
-        $("div.input-row-container").append(diagnosticInputRow(indexOfNextInputRow));
+        var numberOfWordsOfNextInputRow = levelsData[indexOfNextInputRow]
+
+        $("div.input-row-container").append(diagnosticInputRow(indexOfNextInputRow, numberOfWordsOfNextInputRow));
         assignScoreCalculationListener(indexOfNextInputRow);
+
     });
 
     $(".clickable-link-container > a.remove-latest-level").click(function () {
         var numberOfInputRows = $("div.input-row").length;
-
         if (numberOfInputRows > 1) {
             $("div.input-row").last().remove();
         }
+
     });
 
     var startingNumberOfRows = $(".diagnostic-form-container > .new_diagnostic > .input-row-container > div.input-row").length;
     for (var i = 0; i < startingNumberOfRows; i++) {
         assignScoreCalculationListener(i);
+
     }
 
     $(".submit-new-diagnostic").click(function () {
         var numberOfInputRows = $("div.input-row").length;
-
         for (var i = 0; i < numberOfInputRows; i++) {
             if (!phonicsScoreValidator(i)) {
                 var phonicsScoreInput = document.getElementById('diagnostic_levels_attributes_' + i + '_phonics_score');
                 phonicsScoreInput.setCustomValidity("Phonics score must be less than total number of words.");
+            }
+
+            if (!phonicsPercentageValidator(i) && (i < numberOfInputRows - 1)) {
+                var phonicsScoreInput = document.getElementById('diagnostic_levels_attributes_' + i + '_phonics_score');
+                phonicsScoreInput.setCustomValidity("Phonics score must be 99% or higher before proceeding to next level.");
             }
         }
     })
 
 });
 
-function diagnosticInputRow(inputRowIndex) {
+function diagnosticInputRow(inputRowIndex, numberOfTestedWords) {
     return $(
         '<div class="row-container input-row">' +
             '<div class="diagnostic-form-group">' +
                 '<input type="hidden" value=' + (inputRowIndex + 1) + ' class="diagnostic-form-input" name=' + diagnosticAttributeName('reading_level', inputRowIndex) + 'id=' + diagnosticAttributeId('reading_level', inputRowIndex) + '>' +
                 '<p>' + (inputRowIndex + 1) + '</p>' +
             '</div>' +
-            diagnosticAttribute('number_of_tested_words', inputRowIndex) +
+            '<div class="diagnostic-form-group">' +
+                '<input type="hidden" value=' + numberOfTestedWords + ' class="diagnostic-form-input" name=' + diagnosticAttributeName('number_of_tested_words', inputRowIndex) + 'id=' + diagnosticAttributeId('number_of_tested_words', inputRowIndex) + '>' +
+                '<p>' + numberOfTestedWords + '</p>' +
+            '</div>' +
+            // diagnosticAttribute('number_of_tested_words', inputRowIndex) +
             diagnosticAttribute('phonics_score', inputRowIndex, 'phonics-score') +
             '<div class="diagnostic-form-group">' +
                 '<p class="percentage-words-recognised"></p>' +
@@ -94,7 +107,16 @@ function phonicsScoreValidator(inputRowIndex) {
     var numberOfTestedWordsSelector = "input#diagnostic_levels_attributes_" + inputRowIndex + "_number_of_tested_words";
     var phonicsScoreInput = $("input#diagnostic_levels_attributes_" + inputRowIndex + "_phonics_score");
 
-    return $(numberOfTestedWordsSelector).val() >= phonicsScoreInput.val();
+    return parseInt($(numberOfTestedWordsSelector).val()) >= parseInt(phonicsScoreInput.val());
+}
+
+// actually it's between 99% and 100%...... Single validator may be better
+function phonicsPercentageValidator(inputRowIndex) {
+    var numberOfTestedWordsSelector = "input#diagnostic_levels_attributes_" + inputRowIndex + "_number_of_tested_words";
+    var phonicsScoreInput = $("input#diagnostic_levels_attributes_" + inputRowIndex + "_phonics_score");
+    var a = parseFloat((parseFloat(phonicsScoreInput.val())/$(numberOfTestedWordsSelector).val()).toFixed(2));
+
+    return a >= 0.99;
 }
 
 function calculatePercentage(numerator, denominator) {

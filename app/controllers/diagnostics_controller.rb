@@ -8,6 +8,7 @@ class DiagnosticsController < ApplicationController
   def new
     @diagnostic = @student.diagnostics.build
     @diagnostic.levels.build
+    @levels_information = [100,130,140,150,160,170,180,190,200,210,220]
   end
 
   def create
