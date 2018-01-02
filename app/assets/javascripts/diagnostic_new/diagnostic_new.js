@@ -1,11 +1,11 @@
-$(document).ready(function () {
-    $("a.add-next-level").click(function () {
+$(document).on('turbolinks:load', function () {
+    $(".clickable-link-container > a.add-next-level").click(function () {
         var indexOfNextInputRow = $("div.input-row").length;
         $("div.input-row-container").append(diagnosticInputRow(indexOfNextInputRow));
         assignScoreCalculationListener(indexOfNextInputRow);
     });
 
-    $("a.remove-latest-level").click(function () {
+    $(".clickable-link-container > a.remove-latest-level").click(function () {
         var numberOfInputRows = $("div.input-row").length;
 
         if (numberOfInputRows > 1) {
@@ -13,17 +13,31 @@ $(document).ready(function () {
         }
     });
 
-    var startingNumberOfRows = $("div.input-row").length;
+    var startingNumberOfRows = $(".diagnostic-form-container > .new_diagnostic > .input-row-container > div.input-row").length;
     for (var i = 0; i < startingNumberOfRows; i++) {
         assignScoreCalculationListener(i);
     }
+
+    $(".submit-new-diagnostic").click(function () {
+        var numberOfInputRows = $("div.input-row").length;
+
+        for (var i = 0; i < numberOfInputRows; i++) {
+            if (!phonicsScoreValidator(i)) {
+                var phonicsScoreInput = document.getElementById('diagnostic_levels_attributes_' + i + '_phonics_score');
+                phonicsScoreInput.setCustomValidity("Phonics score must be less than total number of words.");
+            }
+        }
+    })
 
 });
 
 function diagnosticInputRow(inputRowIndex) {
     return $(
         '<div class="row-container input-row">' +
-            diagnosticAttribute('reading_level', inputRowIndex) +
+            '<div class="diagnostic-form-group">' +
+                '<input type="hidden" value=' + (inputRowIndex + 1) + ' class="diagnostic-form-input" name=' + diagnosticAttributeName('reading_level', inputRowIndex) + 'id=' + diagnosticAttributeId('reading_level', inputRowIndex) + '>' +
+                '<p>' + (inputRowIndex + 1) + '</p>' +
+            '</div>' +
             diagnosticAttribute('number_of_tested_words', inputRowIndex) +
             diagnosticAttribute('phonics_score', inputRowIndex, 'phonics-score') +
             '<div class="diagnostic-form-group">' +
@@ -47,7 +61,7 @@ function diagnosticAttribute(attribute, inputRowIndex, extraClass) {
     }
 
     return firstDiv +
-            '<input type="number" class="diagnostic-form-input" name=' + attributeName + 'id=' + attributeId + '>' +
+            '<input type="number" class="diagnostic-form-input" name=' + attributeName + 'id=' + attributeId + ' required>' +
         '</div>';
 }
 
@@ -63,15 +77,24 @@ function diagnosticAttributeId(attribute, inputRowIndex) {
 
 function assignScoreCalculationListener(inputRowIndex) {
     var numberOfTestedWordsSelector = "input#diagnostic_levels_attributes_" + inputRowIndex + "_number_of_tested_words";
-    var phonicsScoreInput = $("input#diagnostic_levels_attributes_" + inputRowIndex + "_phonics_score");
+    var phonicsScoreJqueryInput = $("input#diagnostic_levels_attributes_" + inputRowIndex + "_phonics_score");
+    var phonicsScoreHtmlInput = document.getElementById('diagnostic_levels_attributes_' + inputRowIndex + '_phonics_score');
 
-    phonicsScoreInput.keyup(function () {
-        var parentRowContainer = phonicsScoreInput.parent().parent("div.row-container");
+    phonicsScoreJqueryInput.keyup(function () {
+        phonicsScoreHtmlInput.setCustomValidity("");
+        var parentRowContainer = phonicsScoreJqueryInput.parent().parent("div.row-container");
         var percentageWordsRecognised = parentRowContainer.find("p.percentage-words-recognised");
 
-        var percentageCorrect = calculatePercentage(phonicsScoreInput.val(), $(numberOfTestedWordsSelector).val());
+        var percentageCorrect = calculatePercentage(phonicsScoreJqueryInput.val(), $(numberOfTestedWordsSelector).val());
         percentageWordsRecognised.text(percentageCorrect + "%");
     });
+}
+
+function phonicsScoreValidator(inputRowIndex) {
+    var numberOfTestedWordsSelector = "input#diagnostic_levels_attributes_" + inputRowIndex + "_number_of_tested_words";
+    var phonicsScoreInput = $("input#diagnostic_levels_attributes_" + inputRowIndex + "_phonics_score");
+
+    return $(numberOfTestedWordsSelector).val() >= phonicsScoreInput.val();
 }
 
 function calculatePercentage(numerator, denominator) {

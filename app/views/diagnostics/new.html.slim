@@ -21,22 +21,20 @@
       = diagnostic_f.fields_for :levels do |f|
         .row-container.input-row
             .diagnostic-form-group
-              /= f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
-              /p = 1
-              = f.text_field :reading_level, type: 'number', class: 'diagnostic-form-input'
-              /<input id="prodId" name="prodId" type="hidden" value="xm234jq">
+              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
+              p = 1
             .diagnostic-form-group
-              = f.text_field :number_of_tested_words, type: 'number', class: 'diagnostic-form-input'
+              = f.text_field :number_of_tested_words, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group
-              = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score'
+              = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score', required: true
             .diagnostic-form-group
               p.percentage-words-recognised
             .diagnostic-form-group
-              = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input'
+              = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group
-              = f.text_field :comprehension_score, type: 'number', class: 'diagnostic-form-input'
+              = f.text_field :comprehension_score, type: 'number', class: 'diagnostic-form-input', required: true
 
-    = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard'
+    = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard submit-new-diagnostic'
 
   .link-container
     .clickable-link-container
