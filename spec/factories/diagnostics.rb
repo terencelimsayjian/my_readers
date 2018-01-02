@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :diagnostic do
-    name "MyString"
-    student nil
+    association :student
   end
 end
