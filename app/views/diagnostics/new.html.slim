@@ -26,7 +26,6 @@
             .diagnostic-form-group
               = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value: @levels_information[0]
               p = @levels_information[0]
-              /= f.text_field :number_of_tested_words, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group
               = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score', required: true
             .diagnostic-form-group

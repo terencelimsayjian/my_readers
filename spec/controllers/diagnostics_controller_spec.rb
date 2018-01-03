@@ -118,25 +118,4 @@ RSpec.describe DiagnosticsController, type: :controller do
 
   end
 
-
-
-  # describe '#index' do
-  #
-  #   context 'admin views projects' do
-  #     let!(:admin) { create(:admin) }
-  #     let!(:project_1) { create(:project) }
-  #     let!(:project_2) { create(:project) }
-  #     let!(:project_3) { create(:project) }
-  #
-  #     before { sign_in admin }
-  #
-  #     it 'should render facilitators template' do
-  #       get :index
-  #       expect(response).to render_template(:index)
-  #       expect(assigns(:projects)).to eq([project_1, project_2, project_3])
-  #     end
-  #   end
-  # end
-
-
 end
