@@ -10,8 +10,14 @@
       p Name
     li.header-column.large
       p Class
-    li.header-column.large
+    li.header-column.medium
       p Contact
+    li.header-column.medium
+      p Reading Level
+    li.header-column.medium
+      p # Diagnostics
+    li.header-column.medium
+      p Add Diagnostic
 
   - project.students.each do |student|
     ul.table-row
@@ -19,5 +25,11 @@
         p = student.name
       li.large
         p = student.class_name
-      li.large
+      li.medium
         p = student.phone_number
+      li.medium
+        p = '###'
+      li.medium
+        p = '###'
+      li.medium
+        = link_to '+ Add', new_student_diagnostic_path(student.id), class: 'clickable-link'

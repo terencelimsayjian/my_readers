@@ -1,0 +1,50 @@
+.diagnostic-form-container {
+  background-color: white;
+  width: 900px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, .15);
+
+  .row-container {
+    display: flex;
+
+    .diagnostic-form-group {
+      padding-left: 5px;
+      padding-right: 5px;
+      box-sizing: border-box;
+      width: 16%;
+      text-align: center;
+
+      .diagnostic-form-input {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 1em;
+        margin-top: 5px;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+        height: 36px;
+      }
+    }
+
+  }
+
+  .link-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    .clickable-link-container {
+      margin: 0 5px;
+      width: 17%;
+      display: flex;
+      justify-content: center;
+
+      a {
+        font-size: 0.8em;
+      }
+    }
+  }
+}
+

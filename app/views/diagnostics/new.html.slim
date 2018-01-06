@@ -1,0 +1,45 @@
+.header-container
+  h3 = "Add New Diagnostic for #{@student.name} (#{@student.class_name})"
+
+.diagnostic-form-container
+  .row-container
+    .diagnostic-form-group
+      h5 Reading Level
+    .diagnostic-form-group
+      h5 # of words
+    .diagnostic-form-group
+      h5 Word Recognition
+    .diagnostic-form-group
+      h5 % Words Recognised
+    .diagnostic-form-group
+      h5 Fluency
+    .diagnostic-form-group
+      h5 Comprehension
+
+  = form_for @diagnostic, url: student_diagnostic_path do |diagnostic_f|
+    .input-row-container
+      = diagnostic_f.fields_for :levels do |f|
+        .row-container.input-row
+            .diagnostic-form-group
+              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
+              p = 1
+            .diagnostic-form-group
+              = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value: @levels_information[0]
+              p = @levels_information[0]
+            .diagnostic-form-group
+              = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score', required: true
+            .diagnostic-form-group
+              p.percentage-words-recognised
+            .diagnostic-form-group
+              = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input', required: true
+            .diagnostic-form-group
+              = f.text_field :comprehension_score, type: 'number', class: 'diagnostic-form-input', required: true
+    .link-container
+      .clickable-link-container
+        a.clickable-link.add-next-level + Add Next Level
+      .clickable-link-container
+        a.clickable-link.remove-latest-level x Remove Latest Level
+
+    = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard submit-new-diagnostic'
+
+  = content_tag "levels_information", nil, id: 'levels_information', data: { levels_information: @levels_information }

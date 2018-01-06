@@ -10,8 +10,22 @@
 
 .clickable-link {
   color: $grey;
+  text-decoration: underline;
+  display: inline;
 }
 
 .clickable-link:hover {
   color: blue;
+  cursor: pointer;
+}
+
+.btn-standard {
+  background-color: $darker-blue;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  height: 36px;
 }
