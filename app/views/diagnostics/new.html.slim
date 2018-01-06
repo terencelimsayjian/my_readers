@@ -34,12 +34,16 @@
               = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group
               = f.text_field :comprehension_score, type: 'number', class: 'diagnostic-form-input', required: true
-    .link-container
-      .clickable-link-container
+    .bottom-container
+      .adjacent-container.left-container
         a.clickable-link.add-next-level + Add Next Level
-      .clickable-link-container
+      .adjacent-container.right-container
         a.clickable-link.remove-latest-level x Remove Latest Level
 
-    = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard submit-new-diagnostic'
+    .bottom-container.submit-button-container
+      .adjacent-container.left-container
+        = diagnostic_f.submit 'Submit Diagnostic', class: 'btn-standard submit-new-diagnostic'
+      .adjacent-container
+        = diagnostic_f.submit 'Submit and Go To Next Student', class: 'btn-standard submit-new-diagnostic', name: 'submit_and_go_to_next_student'
 
   = content_tag "levels_information", nil, id: 'levels_information', data: { levels_information: @levels_information }

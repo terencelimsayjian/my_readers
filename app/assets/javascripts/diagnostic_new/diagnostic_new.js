@@ -6,9 +6,9 @@ $(document).on('turbolinks:load', function () {
         assignScoreCalculationListener(i);
     }
 
-    $(".clickable-link-container > a.add-next-level").click(addNextInputRow);
+    $("a.add-next-level").click(addNextInputRow);
 
-    $(".clickable-link-container > a.remove-latest-level").click(removeLastInputRow);
+    $("a.remove-latest-level").click(removeLastInputRow);
 
     $(".submit-new-diagnostic").click(performValidations);
 });
@@ -16,11 +16,12 @@ $(document).on('turbolinks:load', function () {
 function addNextInputRow() {
     var levelsData = $("#levels_information").data().levelsInformation;
     var inputRowIndex = $("div.input-row").length;
-
     var numberOfWords = levelsData[inputRowIndex];
-    $("div.input-row-container").append(diagnosticInputRow(inputRowIndex, numberOfWords));
 
-    assignScoreCalculationListener(inputRowIndex);
+    if (inputRowIndex < 11) {
+        $("div.input-row-container").append(diagnosticInputRow(inputRowIndex, numberOfWords));
+        assignScoreCalculationListener(inputRowIndex);
+    }
 }
 
 function removeLastInputRow() {

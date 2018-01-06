@@ -30,20 +30,39 @@
 
   }
 
-  .link-container {
-    margin-top: 10px;
+  .bottom-container {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 
-    .clickable-link-container {
-      margin: 0 5px;
-      width: 17%;
-      display: flex;
-      justify-content: center;
+    .adjacent-container {
+      width: 30%;
+      margin-left: 10px;
+      margin-right: 10px;
 
       a {
-        font-size: 0.8em;
+        font-size: 1em;
       }
+    }
+
+    .left-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .right-container {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .submit-button-container {
+    border-top: 1px solid $light-grey;
+    margin-top: 15px;
+
+    .submit-new-diagnostic {
+      width: 100%;
     }
   }
 }

@@ -22,7 +22,14 @@ class DiagnosticsController < ApplicationController
     end
 
     if @diagnostic.save
-      flash[:notice] = 'Diagnostic successfully created'
+      flash[:notice] = "Diagnostic successfully created for #{@student.name} (#{@student.class_name})"
+
+      if params[:'submit_and_go_to_next_student']
+        students = Student.where("project_id = ?", @student.project_id)
+        index_of_current_student = students.index {|student| student.id == @student.id}
+
+        redirect_to new_student_diagnostic_path(students[index_of_current_student + 1].id) and return
+      end
 
       redirect_url = admin_signed_in? ? admin_project_path(@student.project_id) : facilitator_project_path(@student.project_id)
       redirect_to redirect_url
