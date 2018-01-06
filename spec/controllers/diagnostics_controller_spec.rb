@@ -129,8 +129,6 @@ RSpec.describe DiagnosticsController, type: :controller do
             end
           end
 
-          # REFACTOR LET BLOCKS
-          # TEST FLASH NOTICE
         end
       end
 
