@@ -43,6 +43,39 @@ RSpec.describe DiagnosticsController, type: :controller do
     describe '#admin' do
       before { sign_in admin }
 
+      context 'when diagnostic custom validation fails' do
+        let(:levels_attributes) do
+          {
+              levels_attributes: {
+                  '0': attributes_for(:level),
+              }
+          }
+        end
+
+        let(:params) do
+          {
+              id: student.id,
+              diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
+          }
+        end
+
+        it 'should render new template when custom validation fails' do
+          mock_levels_validator = LevelsValidator.new
+          allow(LevelsValidator).to receive(:new).and_return(mock_levels_validator)
+          allow(mock_levels_validator).to receive(:get_validation_info).and_return({is_valid: false, message: 'invalid message'})
+          post :create, params: params
+          expect(response).to render_template(:new)
+        end
+
+        it 'should return a flash alert with custom validation message' do
+          mock_levels_validator = LevelsValidator.new
+          allow(LevelsValidator).to receive(:new).and_return(mock_levels_validator)
+          allow(mock_levels_validator).to receive(:get_validation_info).and_return({is_valid: false, message: 'invalid message'})
+          post :create, params: params
+          expect(flash[:alert]).to eql('invalid message')
+        end
+      end
+
       context 'when diagnostic creation succeeds' do
         let(:levels_attributes) do
           {

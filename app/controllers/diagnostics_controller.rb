@@ -22,17 +22,18 @@ class DiagnosticsController < ApplicationController
     end
 
     if @diagnostic.save
-      flash[:notice] = "Diagnostic successfully created for #{@student.name} (#{@student.class_name})"
+      students = Student.where("project_id = ?", @student.project_id)
+      current_student_index = students.index { |student| student.id == @student.id }
 
-      if params[:'submit_and_go_to_next_student']
-        students = Student.where("project_id = ?", @student.project_id)
-        index_of_current_student = students.index {|student| student.id == @student.id}
+      flash[:notice] = get_flash_notice(@student, students, current_student_index)
 
-        redirect_to new_student_diagnostic_path(students[index_of_current_student + 1].id) and return
+      if params[:'submit_and_go_to_next_student'] && student_not_last_student(students, current_student_index)
+        redirect_to new_student_diagnostic_path(students[current_student_index + 1].id) and return
+      else
+        user_project_path = admin_signed_in? ? admin_project_path(@student.project_id) : facilitator_project_path(@student.project_id)
+        redirect_to user_project_path
       end
 
-      redirect_url = admin_signed_in? ? admin_project_path(@student.project_id) : facilitator_project_path(@student.project_id)
-      redirect_to redirect_url
     else
       flash[:alert] = @diagnostic.errors.full_messages.to_sentence
       render :new
@@ -40,6 +41,20 @@ class DiagnosticsController < ApplicationController
   end
 
   protected
+
+  def student_not_last_student(students, current_student_index)
+    current_student_index + 1 != students.length
+  end
+
+  def get_flash_notice(current_student, students, current_student_index)
+    flash_notice = "Diagnostic successfully created for #{current_student.name} (#{current_student.class_name})."
+
+    if current_student_index == students.length - 1
+      flash_notice << ' You have reached the end of the student list.'
+    end
+
+    flash_notice
+  end
 
   def diagnostic_params
     params.require(:diagnostic).permit(levels_attributes: [:id, :reading_level, :number_of_tested_words, :phonics_score, :fluency_score, :comprehension_score])
