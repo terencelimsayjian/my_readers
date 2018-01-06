@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe DiagnosticsController, type: :controller do
-  let!(:student) { create(:student) }
-
   describe '#new' do
+    let!(:student) { create(:student) }
+
     context 'non logged in user' do
       it 'redirects to unauthorised page' do
         get :new, params: { id: student.id }
@@ -38,7 +38,8 @@ RSpec.describe DiagnosticsController, type: :controller do
     let!(:facilitator) { create(:facilitator) }
     let!(:admin) { create(:admin) }
     let!(:project) { create(:project) }
-    let!(:student) { create(:student, project: project) }
+    let!(:student_1) { create(:student, project: project, name: 'a') }
+    let!(:student_2) { create(:student, project: project, name: 'b') }
 
     describe '#admin' do
       before { sign_in admin }
@@ -54,7 +55,7 @@ RSpec.describe DiagnosticsController, type: :controller do
 
         let(:params) do
           {
-              id: student.id,
+              id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
           }
         end
@@ -87,15 +88,49 @@ RSpec.describe DiagnosticsController, type: :controller do
 
         let(:params) do
           {
-              id: student.id,
+              id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
           }
         end
 
         it 'should redirect to admin_project#show' do
-
           post :create, params: params
           expect(response).to redirect_to(admin_project_path(project.id))
+        end
+
+        context 'submit and go to next student' do
+          let(:first_student_params) do
+            {
+                id: student_1.id,
+                diagnostic: attributes_for(:diagnostic).merge(levels_attributes),
+                submit_and_go_to_next_student: true
+            }
+            end
+
+          let(:second_student_params) do
+            {
+                id: student_2.id,
+                diagnostic: attributes_for(:diagnostic).merge(levels_attributes),
+                submit_and_go_to_next_student: true
+            }
+          end
+
+          context 'student is not the last student' do
+            it 'should redirect to the next student diagnostic path' do
+              post :create, params: first_student_params
+              expect(response).to redirect_to(new_student_diagnostic_path(student_2.id))
+            end
+          end
+
+          context 'student is the last student' do
+            it 'should redirect the projects page' do
+              post :create, params: second_student_params
+              expect(response).to redirect_to(admin_project_path(project.id))
+            end
+          end
+
+          # REFACTOR LET BLOCKS
+          # TEST FLASH NOTICE
         end
       end
 
@@ -111,7 +146,7 @@ RSpec.describe DiagnosticsController, type: :controller do
 
         let(:invalid_params) do
           {
-              id: student.id,
+              id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
           }
         end
@@ -137,7 +172,7 @@ RSpec.describe DiagnosticsController, type: :controller do
 
         let(:params) do
           {
-              id: student.id,
+              id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
           }
         end
