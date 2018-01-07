@@ -28,8 +28,8 @@
       li.medium
         p = student.phone_number
       li.medium
-        p = '###'
+        p = student.current_reading_level
       li.medium
-        p = '###'
+        p = student.diagnostics.count
       li.medium
         = link_to '+ Add', new_student_diagnostic_path(student.id), class: 'clickable-link'
