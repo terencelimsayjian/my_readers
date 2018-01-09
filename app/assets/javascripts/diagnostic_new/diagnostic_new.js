@@ -1,7 +1,37 @@
 "use strict";
 
 $(document).on('turbolinks:load', function () {
-    var startingNumberOfRows = $(".diagnostic-form-container > .new_diagnostic > .input-row-container > div.input-row").length;
+    $("#diagnostic_index_1").click(changeDiagnosticTemplate.bind(this, 1));
+    $("#diagnostic_index_2").click(changeDiagnosticTemplate.bind(this, 2));
+    $("#diagnostic_index_3").click(changeDiagnosticTemplate.bind(this, 3));
+    $("#diagnostic_index_4").click(changeDiagnosticTemplate.bind(this, 4));
+
+    function changeDiagnosticTemplate(templateId) {
+        var existingNumberOfInputRows = $(".input-row-container > div.input-row").length;
+        var levelsData = $("#levels_information").data().levelsInformation;
+        var diagnosticTemplateData = levelsData[templateId - 1];
+        for (var i = 0; i < existingNumberOfInputRows; i++) {
+
+            replaceNumberOfWordsForLevel(i, diagnosticTemplateData[i]);
+            var phonicsScoreInput = levelAttributeInput('phonics_score', i);
+
+            if (phonicsScoreInput.val() !== "") {
+                phonicsScoreInput.keyup();
+            }
+
+            // add next level needs to pull from new template
+        }
+    }
+
+    function replaceNumberOfWordsForLevel(index, newValue) {
+        var numberOfWordsInput = $("#" + levelAttributeInputID('number_of_tested_words', index));
+        var numberOfWordsDisplay = $("#" + levelAttributeDisplayId('number_of_tested_words', index));
+
+        numberOfWordsInput.val(newValue);
+        numberOfWordsDisplay.text(newValue);
+    }
+
+    var startingNumberOfRows = $(".input-row-container > div.input-row").length;
     for (var i = 0; i < startingNumberOfRows; i++) {
         assignScoreCalculationListener(i);
     }
@@ -16,7 +46,7 @@ $(document).on('turbolinks:load', function () {
 function addNextInputRow() {
     var levelsData = $("#levels_information").data().levelsInformation;
     var inputRowIndex = $("div.input-row").length;
-    var numberOfWords = levelsData[inputRowIndex];
+    var numberOfWords = levelsData[0][inputRowIndex]; // can check which radio button is pressed
 
     if (inputRowIndex < 11) {
         $("div.input-row-container").append(diagnosticInputRow(inputRowIndex, numberOfWords));
@@ -61,17 +91,17 @@ function phonicsScorePassesThreshold(phonicsScore, numberOfTestedWords) {
 }
 
 function assignScoreCalculationListener(inputRowIndex) {
-    var numberOfTestedWords = levelAttributeInput('number_of_tested_words', inputRowIndex).val();
     var phonicsScoreJqueryInput = levelAttributeInput('phonics_score', inputRowIndex);
-    var phonicsScoreHtmlInput = document.getElementById(levelAttributeInputID('phonics_score', inputRowIndex));
 
     phonicsScoreJqueryInput.keyup(function () {
+        var numberOfTestedWords = levelAttributeInput('number_of_tested_words', inputRowIndex).val();
+        var phonicsScoreHtmlInput = document.getElementById(levelAttributeInputID('phonics_score', inputRowIndex));
+
         phonicsScoreHtmlInput.setCustomValidity("");
-        var parentRowContainer = phonicsScoreJqueryInput.parent().parent("div.row-container");
-        var percentageWordsRecognised = parentRowContainer.find("p.percentage-words-recognised");
+        var percentageWordsRecognisedTag = $("#diagnostic_levels_" + inputRowIndex + "_percentage_words_recognised");
 
         var percentageCorrect = calculatePercentage(phonicsScoreJqueryInput.val(), numberOfTestedWords);
-        percentageWordsRecognised.text(percentageCorrect + "%");
+        percentageWordsRecognisedTag.text(percentageCorrect + "%");
     });
 }
 
@@ -82,7 +112,7 @@ function diagnosticInputRow(inputRowIndex, numberOfTestedWords) {
             hiddenDiagnosticAttribute('number_of_tested_words', inputRowIndex, numberOfTestedWords) +
             diagnosticAttribute('phonics_score', inputRowIndex, 'phonics-score') +
             '<div class="diagnostic-form-group">' +
-                '<p class="percentage-words-recognised"></p>' +
+                '<p id="diagnostic_levels_' + inputRowIndex + '_percentage_words_recognised"></p>' +
             '</div>' +
             diagnosticAttribute('fluency_score', inputRowIndex) +
             diagnosticAttribute('comprehension_score', inputRowIndex) +
@@ -93,10 +123,11 @@ function diagnosticInputRow(inputRowIndex, numberOfTestedWords) {
 function hiddenDiagnosticAttribute(attribute, inputRowIndex, inputValue) {
     var attributeName = levelAttributeInputName(attribute, inputRowIndex);
     var attributeId = levelAttributeInputID(attribute, inputRowIndex);
+    var attributeDisplayId = levelAttributeDisplayId(attribute, inputRowIndex);
 
     return '<div class="diagnostic-form-group">' +
                 '<input type="hidden" value=' + inputValue + ' class="diagnostic-form-input" name="' + attributeName + '" id="' + attributeId + '">' +
-                '<p>' + inputValue + '</p>' +
+                '<p id="' + attributeDisplayId + '">' + inputValue + '</p>' +
             '</div>';
 }
 
@@ -120,6 +151,10 @@ function levelAttributeInputName(attribute, inputRowIndex) {
 
 function levelAttributeInputID(attribute, inputRowIndex) {
     return  'diagnostic_levels_attributes_' + inputRowIndex + '_' + attribute;
+}
+
+function levelAttributeDisplayId(attribute, inputRowIndex) {
+    return levelAttributeInputID(attribute, inputRowIndex) + "_display";
 }
 
 function levelAttributeInput(attribute, inputRowIndex) {

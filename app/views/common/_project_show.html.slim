@@ -1,8 +1,11 @@
-= render partial: 'common/summary_label', locals: { legend: 'Total Students', content: project.students.count }
+div
+  = render partial: 'common/summary_label', locals: { legend: 'Beginning Ave Reading Level', content: '##' }
+  = render partial: 'common/summary_label', locals: { legend: 'Current Ave Reading Level', content: '##' }
 
-= render partial: 'common/summary_label', locals: { legend: 'Start Date', content: prettify_date(project.estimated_start_date) }
-
-= render partial: 'common/summary_label', locals: { legend: 'End Date', content: prettify_date(project.estimated_end_date) }
+div
+  = render partial: 'common/summary_label', locals: { legend: 'Total Students', content: project.students.count }
+  = render partial: 'common/summary_label', locals: { legend: 'Start Date', content: prettify_date(project.estimated_start_date) }
+  = render partial: 'common/summary_label', locals: { legend: 'End Date', content: prettify_date(project.estimated_end_date) }
 
 .table-container
   ul.header-row

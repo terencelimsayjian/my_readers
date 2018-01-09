@@ -8,7 +8,12 @@ class DiagnosticsController < ApplicationController
   def new
     @diagnostic = @student.diagnostics.build
     @diagnostic.levels.build
-    @levels_information = [100,130,140,150,160,170,180,190,200,210,220]
+    @levels_information = [
+        [101,102,103,104,105,106,107,108,109,110,111],
+        [201,202,203,204,205,206,207,208,209,210,211],
+        [301,302,303,304,305,306,307,308,309,310,311],
+        [401,402,403,404,405,406,407,408,409,410,411],
+    ]
   end
 
   def create
@@ -59,7 +64,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def diagnostic_params
-    params.require(:diagnostic).permit(levels_attributes: [:id, :reading_level, :number_of_tested_words, :phonics_score, :fluency_score, :comprehension_score])
+    params.require(:diagnostic).permit(:index, levels_attributes: [:id, :reading_level, :number_of_tested_words, :phonics_score, :fluency_score, :comprehension_score])
   end
 
   def prepare_student
