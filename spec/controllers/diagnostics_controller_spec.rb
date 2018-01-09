@@ -45,7 +45,7 @@ RSpec.describe DiagnosticsController, type: :controller do
       before { sign_in admin }
 
       context 'when diagnostic custom validation fails' do
-        let(:levels_attributes) do
+        let!(:levels_attributes) do
           {
               levels_attributes: {
                   '0': attributes_for(:level),
@@ -53,7 +53,7 @@ RSpec.describe DiagnosticsController, type: :controller do
           }
         end
 
-        let(:params) do
+        let!(:params) do
           {
               id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
@@ -78,15 +78,15 @@ RSpec.describe DiagnosticsController, type: :controller do
       end
 
       context 'when diagnostic creation succeeds' do
-        let(:levels_attributes) do
+        let!(:levels_attributes) do
           {
               levels_attributes: {
-                  '0': attributes_for(:level),
+                  '0': attributes_for(:level, reading_level: 1),
               }
           }
         end
 
-        let(:params) do
+        let!(:params) do
           {
               id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
@@ -99,7 +99,7 @@ RSpec.describe DiagnosticsController, type: :controller do
         end
 
         context 'submit and go to next student' do
-          let(:first_student_params) do
+          let!(:first_student_params) do
             {
                 id: student_1.id,
                 diagnostic: attributes_for(:diagnostic).merge(levels_attributes),
@@ -107,7 +107,7 @@ RSpec.describe DiagnosticsController, type: :controller do
             }
             end
 
-          let(:second_student_params) do
+          let!(:second_student_params) do
             {
                 id: student_2.id,
                 diagnostic: attributes_for(:diagnostic).merge(levels_attributes),
@@ -133,7 +133,7 @@ RSpec.describe DiagnosticsController, type: :controller do
       end
 
       context 'when diagnostic creation fails' do
-        let(:levels_attributes) do
+        let!(:levels_attributes) do
           {
               levels_attributes: {
                   '0': attributes_for(:level),
@@ -142,7 +142,7 @@ RSpec.describe DiagnosticsController, type: :controller do
           }
         end
 
-        let(:invalid_params) do
+        let!(:invalid_params) do
           {
               id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)
@@ -160,15 +160,15 @@ RSpec.describe DiagnosticsController, type: :controller do
       before { sign_in facilitator }
 
       context 'when diagnostic creation succeeds' do
-        let(:levels_attributes) do
+        let!(:levels_attributes) do
           {
               levels_attributes: {
-                  '0': attributes_for(:level),
+                  '0': attributes_for(:level, reading_level: 1),
               }
           }
         end
 
-        let(:params) do
+        let!(:params) do
           {
               id: student_1.id,
               diagnostic: attributes_for(:diagnostic).merge(levels_attributes)

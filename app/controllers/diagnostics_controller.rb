@@ -21,6 +21,8 @@ class DiagnosticsController < ApplicationController
       render :new and return
     end
 
+    # byebug
+
     if @diagnostic.save
       students = Student.where("project_id = ?", @student.project_id)
       current_student_index = students.index { |student| student.id == @student.id }
@@ -31,7 +33,7 @@ class DiagnosticsController < ApplicationController
         redirect_to new_student_diagnostic_path(students[current_student_index + 1].id) and return
       else
         user_project_path = admin_signed_in? ? admin_project_path(@student.project_id) : facilitator_project_path(@student.project_id)
-        redirect_to user_project_path
+        redirect_to user_project_path and return
       end
 
     else
