@@ -19,7 +19,8 @@ $(document).on('turbolinks:load', function () {
                 phonicsScoreInput.keyup();
             }
 
-            // add next level needs to pull from new template
+            $("a.add-next-level").off("click");
+            $("a.add-next-level").click(addNextInputRow.bind(this, templateId - 1));
         }
     }
 
@@ -36,17 +37,17 @@ $(document).on('turbolinks:load', function () {
         assignScoreCalculationListener(i);
     }
 
-    $("a.add-next-level").click(addNextInputRow);
+    $("a.add-next-level").click(addNextInputRow.bind(this, 0));
 
     $("a.remove-latest-level").click(removeLastInputRow);
 
     $(".submit-new-diagnostic").click(performValidations);
 });
 
-function addNextInputRow() {
+function addNextInputRow(diagnosticTemplateIndex) {
     var levelsData = $("#levels_information").data().levelsInformation;
     var inputRowIndex = $("div.input-row").length;
-    var numberOfWords = levelsData[0][inputRowIndex]; // can check which radio button is pressed
+    var numberOfWords = levelsData[diagnosticTemplateIndex][inputRowIndex]; // can check which radio button is pressed
 
     if (inputRowIndex < 11) {
         $("div.input-row-container").append(diagnosticInputRow(inputRowIndex, numberOfWords));
