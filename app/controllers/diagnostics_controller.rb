@@ -26,7 +26,6 @@ class DiagnosticsController < ApplicationController
       render :new and return
     end
 
-    # byebug
 
     if @diagnostic.save
       students = Student.where("project_id = ?", @student.project_id)
