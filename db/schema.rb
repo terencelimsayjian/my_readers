@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171228064803) do
 
   create_table "diagnostics", force: :cascade do |t|
     t.bigint "student_id"
+    t.integer "index", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_diagnostics_on_student_id"

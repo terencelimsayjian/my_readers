@@ -55,7 +55,7 @@ RSpec.describe Admin::ProjectsController, type: :controller do
       it 'should render project' do
         get :show, params: { id: project.id }
         expect(response).to render_template(:show)
-        expect(assigns(:project)).to eq(project)
+        expect(assigns(:project_view_object).is_a? ProjectViewHelper::ProjectViewObject).to be_truthy
       end
     end
   end

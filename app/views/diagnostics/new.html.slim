@@ -1,35 +1,57 @@
 .header-container
   h3 = "Add New Diagnostic for #{@student.name} (#{@student.class_name})"
 
-.diagnostic-form-container
-  .row-container
-    .diagnostic-form-group
-      h5 Reading Level
-    .diagnostic-form-group
-      h5 # of words
-    .diagnostic-form-group
-      h5 Word Recognition
-    .diagnostic-form-group
-      h5 % Words Recognised
-    .diagnostic-form-group
-      h5 Fluency
-    .diagnostic-form-group
-      h5 Comprehension
+= form_for @diagnostic, url: student_diagnostic_path do |diagnostic_f|
 
-  = form_for @diagnostic, url: student_diagnostic_path do |diagnostic_f|
+  .diagnostic-form-container.diagnostic-form-radio-btn-container
+    p.select-current-diagnostic-text Select current diagnostic:
+
+    .radio-btn-container
+      .radio-btn-input
+        = diagnostic_f.radio_button :index, 1, checked: true
+        div.radio-label-container
+          = label :diagnostic, :index, 'Diagnostic 1', value: 1
+      .radio-btn-input
+        = diagnostic_f.radio_button :index, 2
+        div.radio-label-container
+          = label :diagnostic, :index, 'Diagnostic 2', value: 2
+      .radio-btn-input
+        = diagnostic_f.radio_button :index, 3
+        div.radio-label-container
+          = label :diagnostic, :index, 'Diagnostic 3', value: 3
+      .radio-btn-input
+        = diagnostic_f.radio_button :index, 4
+        div.radio-label-container
+          = label :diagnostic, :index, 'Diagnostic 4', value: 4
+
+  .diagnostic-form-container
+    .row-container
+      .diagnostic-form-group
+        h5 Reading Level
+      .diagnostic-form-group
+        h5 # of words
+      .diagnostic-form-group
+        h5 Word Recognition
+      .diagnostic-form-group
+        h5 % Words Recognised
+      .diagnostic-form-group
+        h5 Fluency
+      .diagnostic-form-group
+        h5 Comprehension
+
     .input-row-container
       = diagnostic_f.fields_for :levels do |f|
         .row-container.input-row
             .diagnostic-form-group
-              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
-              p = 1
+              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: f.index + 1
+              p = f.index + 1
             .diagnostic-form-group
-              = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value: @levels_information[0]
-              p = @levels_information[0]
+              = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value:@levels_information[@diagnostic.index ? @diagnostic.index - 1 : 0][f.index]
+              = content_tag :p, @levels_information[@diagnostic.index ? @diagnostic.index - 1 : 0][f.index], id: "diagnostic_levels_attributes_#{f.index}_number_of_tested_words_display"
             .diagnostic-form-group
               = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score', required: true
             .diagnostic-form-group
-              p.percentage-words-recognised
+              = content_tag :p, '', id: "diagnostic_levels_#{f.index}_percentage_words_recognised"
             .diagnostic-form-group
               = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group
@@ -46,4 +68,4 @@
       .adjacent-container
         = diagnostic_f.submit 'Submit and Go To Next Student', class: 'btn-standard submit-new-diagnostic', name: 'submit_and_go_to_next_student'
 
-  = content_tag "levels_information", nil, id: 'levels_information', data: { levels_information: @levels_information }
+    = content_tag "levels_information", nil, id: 'levels_information', data: { levels_information: @levels_information }

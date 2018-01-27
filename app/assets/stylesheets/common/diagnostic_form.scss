@@ -5,6 +5,39 @@
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, .15);
 
+  .select-current-diagnostic-text {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+  }
+
+  .radio-btn-container {
+    display: flex;
+    justify-content: space-between;
+
+
+    .radio-btn-input {
+      width: 25%;
+      display: flex;
+      align-content: center;
+
+      input {
+        height: 2em;
+        width: 2em;
+        margin: 0 0 0 20px;
+      }
+
+      .radio-label-container {
+        display: flex;
+        align-items: center;
+
+        label {
+          font-size: 1em;
+        }
+      }
+
+    }
+  }
+
   .row-container {
     display: flex;
 
@@ -67,3 +100,7 @@
   }
 }
 
+.diagnostic-form-radio-btn-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}

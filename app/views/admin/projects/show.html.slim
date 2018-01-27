@@ -1,5 +1,5 @@
 .header-container
-  h3 = @project.name
-  = link_to 'Edit Project Details', edit_admin_project_path(@project.id), class: 'link-btn'
+  h3 = @project_view_object.project.name
+  = link_to 'Edit Project Details', edit_admin_project_path(@project_view_object.project.id), class: 'link-btn'
 
-= render partial: 'common/project_show', locals: { project: @project }
+= render partial: 'common/project_show', locals: { project: @project_view_object }
