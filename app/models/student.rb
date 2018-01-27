@@ -13,9 +13,24 @@ class Student < ApplicationRecord
     return 0 unless latest_diagnostic
 
     levels = latest_diagnostic.levels.order(:reading_level)
-    scores = levels.map { |level| PhonicsScoreUtil.calculate_percentage_correct(level, 2) }
+    getHighestReadingLevel(levels)
+  end
 
-    failure_level_index = scores.index { | score | score < 0.92 }
+  def beginning_reading_level
+    diagnostic = self.diagnostics.order(:created_at).first
+
+    return 0 unless diagnostic
+
+    levels = diagnostic.levels.order(:reading_level)
+    getHighestReadingLevel(levels)
+  end
+
+  private
+
+  def getHighestReadingLevel(orderedLevels)
+    scores = orderedLevels.map {|level| PhonicsScoreUtil.calculate_percentage_correct(level, 2)}
+
+    failure_level_index = scores.index {|score| score < 0.92}
 
     failure_level_index ? failure_level_index : 11
   end
