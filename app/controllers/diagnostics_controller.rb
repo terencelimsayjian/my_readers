@@ -5,27 +5,29 @@ class DiagnosticsController < ApplicationController
   before_action :authenticate_user
   before_action :prepare_student, only: [:new, :create]
 
+  LEVELS_INFORMATION = [
+      [101,102,103,104,105,106,107,108,109,110,111],
+      [201,202,203,204,205,206,207,208,209,210,211],
+      [301,302,303,304,305,306,307,308,309,310,311],
+      [401,402,403,404,405,406,407,408,409,410,411],
+  ]
+
   def new
     @diagnostic = @student.diagnostics.build
     @diagnostic.levels.build
-    @levels_information = [
-        [101,102,103,104,105,106,107,108,109,110,111],
-        [201,202,203,204,205,206,207,208,209,210,211],
-        [301,302,303,304,305,306,307,308,309,310,311],
-        [401,402,403,404,405,406,407,408,409,410,411],
-    ]
+    @levels_information = LEVELS_INFORMATION
   end
 
   def create
     diagnostic_level_validation_info = LevelsValidator.new.get_validation_info(params[:diagnostic][:levels_attributes].values)
 
     @diagnostic = @student.diagnostics.build(diagnostic_params)
+    @levels_information = LEVELS_INFORMATION
 
     unless diagnostic_level_validation_info[:is_valid]
       flash[:alert] = diagnostic_level_validation_info[:message]
       render :new and return
     end
-
 
     if @diagnostic.save
       students = Student.where("project_id = ?", @student.project_id)

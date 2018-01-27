@@ -43,15 +43,15 @@
       = diagnostic_f.fields_for :levels do |f|
         .row-container.input-row
             .diagnostic-form-group
-              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: 1
-              p = 1
+              = f.hidden_field :reading_level, type: 'hidden', class: 'diagnostic-form-input', value: f.index + 1
+              p = f.index + 1
             .diagnostic-form-group
-              = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value: @levels_information[0][0]
-              p#diagnostic_levels_attributes_0_number_of_tested_words_display = @levels_information[0][0]
+              = f.hidden_field :number_of_tested_words, type: 'hidden', class: 'diagnostic-form-input', value:@levels_information[@diagnostic.index ? @diagnostic.index - 1 : 0][f.index]
+              = content_tag :p, @levels_information[@diagnostic.index ? @diagnostic.index - 1 : 0][f.index], id: "diagnostic_levels_attributes_#{f.index}_number_of_tested_words_display"
             .diagnostic-form-group
               = f.text_field :phonics_score, type: 'number', class: 'diagnostic-form-input phonics-score', required: true
             .diagnostic-form-group
-              p#diagnostic_levels_0_percentage_words_recognised
+              = content_tag :p, '', id: "diagnostic_levels_#{f.index}_percentage_words_recognised"
             .diagnostic-form-group
               = f.text_field :fluency_score, type: 'number', class: 'diagnostic-form-input', required: true
             .diagnostic-form-group

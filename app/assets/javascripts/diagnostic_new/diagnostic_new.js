@@ -8,9 +8,12 @@ $(document).on('turbolinks:load', function () {
         assignScoreCalculationListener(i);
     }
 
-    $("a.add-next-level").click(addNextInputRow.bind(this, 0));
+    $("a.add-next-level").click(addNextInputRow.bind(this, 0)); // need to change template
 
     $("a.remove-latest-level").click(removeLastInputRow);
+
+    var currentDiagnosticTemplate = $(".radio-btn-input > input:checked").val();
+    updateDiagnosticTemplateToSubmitted(currentDiagnosticTemplate);
 
     $(".submit-new-diagnostic").click(performValidations);
 });
@@ -70,6 +73,10 @@ function removeLastInputRow() {
     if (getNumberOfInputRows() > 1) {
         $("div.input-row").last().remove();
     }
+}
+
+function updateDiagnosticTemplateToSubmitted (diagnosticTemplate) {
+    changeDiagnosticTemplate(diagnosticTemplate);
 }
 
 function calculatePercentage(numerator, denominator) {
