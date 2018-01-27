@@ -27,12 +27,13 @@ class Student < ApplicationRecord
 
   private
 
-  def getHighestReadingLevel(orderedLevels)
-    scores = orderedLevels.map {|level| PhonicsScoreUtil.calculate_percentage_correct(level, 2)}
+  def getHighestReadingLevel(ordered_levels)
+    scores = ordered_levels.map {|level| PhonicsScoreUtil.calculate_percentage_correct(level, 2)}
 
     failure_level_index = scores.index {|score| score < 0.92}
 
-    failure_level_index ? failure_level_index : 11
+    failure_level_index ? failure_level_index : ordered_levels.size
+    # if they submit a single level which passes, this results in 11 due to failure_level_index being nil
   end
 
 end

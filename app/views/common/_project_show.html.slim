@@ -1,11 +1,11 @@
 div
-  = render partial: 'common/summary_label', locals: { legend: 'Beginning Ave Reading Level', content: '##' }
-  = render partial: 'common/summary_label', locals: { legend: 'Current Ave Reading Level', content: '##' }
+  = render partial: 'common/summary_label', locals: { legend: 'Beginning Ave Reading Level', content: project.labels[:beginning_average_reading_level] }
+  = render partial: 'common/summary_label', locals: { legend: 'Current Ave Reading Level', content: project.labels[:current_average_reading_level] }
 
 div
-  = render partial: 'common/summary_label', locals: { legend: 'Total Students', content: project.students.count }
-  = render partial: 'common/summary_label', locals: { legend: 'Start Date', content: prettify_date(project.estimated_start_date) }
-  = render partial: 'common/summary_label', locals: { legend: 'End Date', content: prettify_date(project.estimated_end_date) }
+  = render partial: 'common/summary_label', locals: { legend: 'Total Students', content: project.labels[:total_students] }
+  = render partial: 'common/summary_label', locals: { legend: 'Start Date', content: prettify_date(project.project.estimated_start_date) }
+  = render partial: 'common/summary_label', locals: { legend: 'End Date', content: prettify_date(project.project.estimated_end_date) }
 
 .table-container
   ul.header-row
@@ -33,6 +33,6 @@ div
       li.medium
         p = student.current_reading_level
       li.medium
-        p = student.diagnostics.count
+        p = student.num_diagnostics_taken
       li.medium
         = link_to '+ Add', new_student_diagnostic_path(student.id), class: 'clickable-link'
