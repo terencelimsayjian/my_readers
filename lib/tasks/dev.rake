@@ -12,7 +12,7 @@ if Rails.env.development? || Rails.env.test? || Rails.env.staging?
         end
       end
 
-      %w[admins facilitators].each(&execute)
+      %w[admins facilitators projects].each(&execute)
     end
   end
 
