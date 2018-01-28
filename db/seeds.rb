@@ -1,4 +1,4 @@
-seed_files = %w[admins facilitators]
+seed_files = %w[admins facilitators projects]
 
 seed_files.each do |seed|
   seed_path = Rails.root.join('db', 'seeds', "#{seed}.rb")
