@@ -1,11 +1,17 @@
-<p><%= t('devise.mailer.invitation_instructions.hello', email: @resource.email) %></p>
+<p>Dear <%= @resource.full_name%>,</p>
 
-<p><%= t('devise.mailer.invitation_instructions.someone_invited_you', url: root_url) %></p>
+<p>Congratulations on embarking on this journey to get our struggling students to be successful readers.</p>
 
-<p><%= link_to t('devise.mailer.invitation_instructions.accept'), accept_facilitator_invitation_url(invitation_token: @token) %></p>
+<p>To ensure each child is well supported, we need to track their progress. We're happy to share with you this platform to make recording and tracking their results easy for you.</p>
 
-<% if @resource.invitation_due_at %>
-  <p><%= t('devise.mailer.invitation_instructions.accept_until', due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
-<% end %>
+<p>Please go to <%= link_to('this link', accept_facilitator_invitation_url(invitation_token: @token)) %> to register yourself and your class. This invitation will expire on <%= l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format') %>.</p>
 
-<p><%= t('devise.mailer.invitation_instructions.ignore').html_safe %></p>
+<p>Thank you.</p>
+
+<p>From,<br/>
+  The MYReaders Team<br/>
+  <%= link_to('MYReaders Platform', root_url) %>
+</p>
+
+
+<p>'One day, every child will be able to read.'</p>
