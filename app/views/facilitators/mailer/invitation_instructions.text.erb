@@ -1,2 +1,15 @@
+Dear <%= @resource.full_name %>,
+
+Congratulations on embarking on this journey to get our struggling students to be successful readers.
+
+To ensure each child is well supported, we need to track their progress. We're happy to share with you this platform to make recording and tracking their results easy for you.
+
+Please go to <%= link_to('this link', accept_facilitator_invitation_url(invitation_token: @token)) %> to register yourself and your class. This invitation will expire on <%= l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format') %>.
+
+Thank you.
+
+From,
+The MYReaders Team
+<%= link_to('MYReaders Platform', root_url) %>
 
 'One day, every child will be able to read.'
