@@ -27,6 +27,8 @@ gem 'devise_invitable', '~> 1.7.0'
 
 gem 'cocoon'
 
+gem 'figaro'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_girl_rails'

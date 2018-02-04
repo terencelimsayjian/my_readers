@@ -30,6 +30,16 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      :port           => ENV["MAILGUN_SMTP_PORT"],
+      :address        => ENV["MAILGUN_ADDRESS"],
+      :domain         => ENV["MAILGUN_DOMAIN"],
+      :user_name      => ENV["MAILGUN_USERNAME"],
+      :password       => ENV["MAILGUN_PASSWORD"],
+      :authentication => :plain,
+  }
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
