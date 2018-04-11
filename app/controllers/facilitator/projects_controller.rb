@@ -7,7 +7,8 @@ class Facilitator::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    project = Project.find(params[:id])
+    @project_view_object = ProjectViewHelper::ProjectViewObject.new(project)
   end
 
 end
