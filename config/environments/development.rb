@@ -28,15 +28,7 @@ Rails.application.configure do
 
   # Send emails through MailCatcher
   config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
-  config.action_mailer.smtp_settings = {
-      :port           => ENV["MAILGUN_SMTP_PORT"],
-      :address        => ENV["MAILGUN_ADDRESS"],
-      :domain         => ENV["MAILGUN_DOMAIN"],
-      :user_name      => ENV["MAILGUN_USERNAME"],
-      :password       => ENV["MAILGUN_PASSWORD"],
-      :authentication => :plain,
-  }
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
 
   # Configuration for devise
